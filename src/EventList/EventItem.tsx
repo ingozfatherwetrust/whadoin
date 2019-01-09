@@ -30,6 +30,9 @@ export default class EventItem extends React.Component<EventProps> {
                         <Text>Confirm</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.interactionButton}>
+                        <Text>Interested</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.interactionButton}>
                         <Text>Deny</Text>
                     </TouchableOpacity>
                 </View>

@@ -14,12 +14,34 @@ var react_1 = require("react");
 var react_native_1 = require("react-native");
 var EventItem_1 = require("../EventList/EventItem");
 var events_1 = require("../../assets/jsonFiles/events");
+var Footer_1 = require("../NavigationFooter/Footer");
+var AddEvent_1 = require("../AddEvent/AddEvent");
 var Dashboard = /** @class */ (function (_super) {
     __extends(Dashboard, _super);
-    function Dashboard() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
+    function Dashboard(props) {
+        var _this = _super.call(this, props) || this;
+        _this.setModalVisible = function () {
+            _this.setState({ modalVisible: !_this.state.modalVisible });
+        };
         _this.addEvent = function () {
-            alert('add event');
+            // this.props.navigation.navigate('AddEventPage')
+            _this.setModalVisible();
+        };
+        _this.renderBottomOfPage = function () {
+            if (_this.state.modalVisible) {
+                return (<react_native_1.View style={styles.modalContainer}>
+                    <react_native_1.Modal animationType="slide" transparent={false} visible={_this.state.modalVisible} onRequestClose={function () {
+                    alert('Modal has been closed.');
+                }}>
+                            <AddEvent_1.default onCancel={_this.setModalVisible} onSubmit={null}/>
+
+                    </react_native_1.Modal>
+                </react_native_1.View>);
+            }
+            return (<Footer_1.default onAddEvent={_this.addEvent}/>);
+        };
+        _this.state = {
+            modalVisible: false
         };
         return _this;
     }
@@ -27,26 +49,14 @@ var Dashboard = /** @class */ (function (_super) {
         var keyExtractor = function (_, index) { return String(index); };
         return (<react_native_1.View style={styles.container}>
                 <react_native_1.View style={styles.dashboard}>
+
                     <react_native_1.FlatList keyExtractor={keyExtractor} data={events_1.default} renderItem={function (_a) {
             var item = _a.item;
             return <EventItem_1.default userName={item.userName} eventTitle={item.eventTitle} eventDescription={item.eventDescription}/>;
         }}/>
 
                 </react_native_1.View>
-                <react_native_1.View style={styles.footer}>
-                    <react_native_1.TouchableOpacity style={styles.addEventButton} onPress={this.addEvent}>
-                        <react_native_1.Text style={styles.selectedNavButtonText}>View Events</react_native_1.Text>
-                    </react_native_1.TouchableOpacity>
-                    <react_native_1.TouchableOpacity style={styles.addEventButton} onPress={this.addEvent}>
-                        <react_native_1.Text style={styles.addEventText}>Add Event</react_native_1.Text>
-                    </react_native_1.TouchableOpacity>
-                    <react_native_1.TouchableOpacity style={styles.addEventButton} onPress={this.addEvent}>
-                        <react_native_1.Text style={styles.addEventText}>Manage Groups</react_native_1.Text>
-                    </react_native_1.TouchableOpacity>
-                    <react_native_1.TouchableOpacity style={styles.addEventButton} onPress={this.addEvent}>
-                        <react_native_1.Text style={styles.addEventText}>View Profile</react_native_1.Text>
-                    </react_native_1.TouchableOpacity>
-                </react_native_1.View>
+                {this.renderBottomOfPage()}
 
             </react_native_1.View>);
     };
@@ -65,27 +75,8 @@ var styles = react_native_1.StyleSheet.create({
     dashboard: {
         flex: 10
     },
-    footer: {
-        flex: 1,
-        flexDirection: 'row'
-    },
-    addEventButton: {
-        flex: 1,
-        backgroundColor: '#f2f2f2',
-        width: 50,
-        height: 50,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRightColor: 'white',
-        borderRightWidth: .5
-        // marginLeft: 10,
-    },
-    addEventText: {
-        fontSize: 10,
-        color: '#bfbfbf',
-    },
-    selectedNavButtonText: {
-        fontSize: 10,
-        color: 'green'
+    modalContainer: {
+        height: 500,
+        color: 'blue'
     }
 });

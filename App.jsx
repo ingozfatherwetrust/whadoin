@@ -21,9 +21,11 @@ var react_1 = require("react");
 var react_navigation_1 = require("react-navigation");
 var LogonPage_1 = require("./src/Logon/LogonPage");
 var Dashboard_1 = require("./src/Dashboard/Dashboard");
+var AddEvent_1 = require("./src/AddEvent/AddEvent");
 var RootStack = react_navigation_1.createStackNavigator({
     LogOn: LogonPage_1.default,
-    DashboardPage: Dashboard_1.default
+    DashboardPage: Dashboard_1.default,
+    AddEventPage: AddEvent_1.default
 }, {
     initialRouteName: 'LogOn',
     navigationOptions: {

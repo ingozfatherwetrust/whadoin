@@ -11,11 +11,13 @@ import {Platform, StyleSheet, Text, View, TextInput, Image, ImageBackground, But
 import { createStackNavigator } from 'react-navigation';
 import LogonPage from "./src/Logon/LogonPage";
 import Dashboard from './src/Dashboard/Dashboard'
+import AddEvent from "./src/AddEvent/AddEvent";
 
 const RootStack = createStackNavigator(
     {
         LogOn: LogonPage,
-        DashboardPage: Dashboard
+        DashboardPage: Dashboard,
+        AddEventPage: AddEvent
     },
     {
         initialRouteName: 'LogOn',

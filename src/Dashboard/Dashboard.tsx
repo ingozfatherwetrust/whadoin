@@ -1,16 +1,36 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TextInput, Image, ImageBackground, TouchableOpacity, ScrollView, FlatList} from 'react-native';
+import {Platform,
+    StyleSheet,
+    Text,
+    View,
+    TextInput,
+    Image,
+    ImageBackground,
+    TouchableOpacity,
+    ScrollView,
+    FlatList,
+    Modal} from 'react-native';
 import EventItem from '../EventList/EventItem';
-import events, {eventType} from '../../assets/jsonFiles/events';
+import events from '../../assets/jsonFiles/events';
+import Footer from "../NavigationFooter/Footer";
+import AddEvent from "../AddEvent/AddEvent";
 
-
-export default class Dashboard extends React.Component {
-
-    render () {
+interface DashboardState {
+    modalVisible: boolean
+}
+export default class Dashboard extends React.Component<null, DashboardState> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            modalVisible: false
+        };
+    }
+    public render () {
         const keyExtractor = (_: any, index: number) => String(index);
         return (
             <View style={styles.container}>
                 <View style={styles.dashboard}>
+
                     <FlatList
                         keyExtractor={keyExtractor}
                         data={events}
@@ -23,38 +43,43 @@ export default class Dashboard extends React.Component {
                     />
 
                 </View>
-                <View style={styles.footer}>
-                    <TouchableOpacity
-                        style={styles.addEventButton}
-                        onPress={this.addEvent}
-                    >
-                        <Text style={styles.selectedNavButtonText}>View Events</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.addEventButton}
-                        onPress={this.addEvent}
-                    >
-                        <Text style={styles.addEventText}>Add Event</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.addEventButton}
-                        onPress={this.addEvent}
-                    >
-                        <Text style={styles.addEventText}>Manage Groups</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.addEventButton}
-                        onPress={this.addEvent}
-                    >
-                        <Text style={styles.addEventText}>View Profile</Text>
-                    </TouchableOpacity>
-                </View>
+                {this.renderBottomOfPage()}
 
             </View>
         )
     }
+    private setModalVisible = () => {
+        this.setState({modalVisible: !this.state.modalVisible});
+    }
     private addEvent = () => {
-        alert('add event')
+        // this.props.navigation.navigate('AddEventPage')
+        this.setModalVisible();
+    }
+    private renderBottomOfPage = () => {
+        if(this.state.modalVisible) {
+            return (
+                <View style={styles.modalContainer}>
+                    <Modal
+                        animationType="slide"
+                        transparent={false}
+                        visible={this.state.modalVisible}
+                        onRequestClose={() => {
+                            alert('Modal has been closed.');
+                        }}>
+                            <AddEvent
+                                onCancel={this.setModalVisible}
+                                onSubmit={null}
+                            />
+
+                    </Modal>
+                </View>
+            )
+        }
+        return (
+            <Footer
+                onAddEvent={this.addEvent}
+            />
+        )
     }
 }
 const styles = StyleSheet.create({
@@ -69,28 +94,8 @@ const styles = StyleSheet.create({
     dashboard: {
         flex: 10
     },
-    footer: {
-        flex: 1,
-        flexDirection: 'row'
-    },
-    addEventButton: {
-        flex: 1,
-        backgroundColor: '#f2f2f2',
-        width: 50,
-        height: 50,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRightColor: 'white',
-        borderRightWidth: .5
-        // marginLeft: 10,
-
-    },
-    addEventText: {
-        fontSize: 10,
-        color: '#bfbfbf',
-    },
-    selectedNavButtonText: {
-        fontSize: 10,
-        color: 'green'
+    modalContainer: {
+        height: 500,
+        color: 'blue'
     }
 });

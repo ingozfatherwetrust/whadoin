@@ -37,6 +37,9 @@ var EventItem = /** @class */ (function (_super) {
                         <react_native_1.Text>Confirm</react_native_1.Text>
                     </react_native_1.TouchableOpacity>
                     <react_native_1.TouchableOpacity style={styles.interactionButton}>
+                        <react_native_1.Text>Interested</react_native_1.Text>
+                    </react_native_1.TouchableOpacity>
+                    <react_native_1.TouchableOpacity style={styles.interactionButton}>
                         <react_native_1.Text>Deny</react_native_1.Text>
                     </react_native_1.TouchableOpacity>
                 </react_native_1.View>

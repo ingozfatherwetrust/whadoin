@@ -11,11 +11,11 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = require("react");
-var Dashboard = /** @class */ (function (_super) {
-    __extends(Dashboard, _super);
-    function Dashboard() {
+var AddEvent = /** @class */ (function (_super) {
+    __extends(AddEvent, _super);
+    function AddEvent() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    return Dashboard;
+    return AddEvent;
 }(react_1.default.Component));
-exports.default = Dashboard;
+exports.default = AddEvent;
