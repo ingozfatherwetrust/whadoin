@@ -24,7 +24,7 @@ var Footer = /** @class */ (function (_super) {
                         <react_native_1.Text style={styles.selectedNavButtonText}>Your Events</react_native_1.Text>
                     </react_native_1.TouchableOpacity>
 
-                    <react_native_1.TouchableOpacity style={styles.footerButton} onPress={this.addEvent}>
+                    <react_native_1.TouchableOpacity style={styles.footerButton} onPress={this.props.onManageGroups}>
                         <react_native_1.Text style={styles.addEventText}>Manage Groups</react_native_1.Text>
                     </react_native_1.TouchableOpacity>
                     <react_native_1.TouchableOpacity style={styles.addEventButton} onPress={this.props.onAddEvent}>

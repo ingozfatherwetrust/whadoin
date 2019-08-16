@@ -20,28 +20,31 @@ var Dashboard = /** @class */ (function (_super) {
     __extends(Dashboard, _super);
     function Dashboard(props) {
         var _this = _super.call(this, props) || this;
-        _this.setModalVisible = function () {
-            _this.setState({ modalVisible: !_this.state.modalVisible });
+        _this.setAddEventModalVisible = function () {
+            _this.setState({ addEventModalVisible: !_this.state.addEventModalVisible });
         };
         _this.addEvent = function () {
             // this.props.navigation.navigate('AddEventPage')
-            _this.setModalVisible();
+            _this.setAddEventModalVisible();
+        };
+        _this.manageGroups = function () {
+            alert('manageGroups');
         };
         _this.renderBottomOfPage = function () {
-            if (_this.state.modalVisible) {
+            if (_this.state.addEventModalVisible) {
                 return (<react_native_1.View style={styles.modalContainer}>
-                    <react_native_1.Modal animationType="slide" transparent={false} visible={_this.state.modalVisible} onRequestClose={function () {
+                    <react_native_1.Modal animationType="slide" transparent={false} visible={_this.state.addEventModalVisible} onRequestClose={function () {
                     alert('Modal has been closed.');
                 }}>
-                            <AddEvent_1.default onCancel={_this.setModalVisible} onSubmit={null}/>
+                            <AddEvent_1.default onCancel={_this.setAddEventModalVisible} onSubmit={_this.manageGroups}/>
 
                     </react_native_1.Modal>
                 </react_native_1.View>);
             }
-            return (<Footer_1.default onAddEvent={_this.addEvent}/>);
+            return (<Footer_1.default onAddEvent={_this.addEvent} onManageGroups={_this.manageGroups}/>);
         };
         _this.state = {
-            modalVisible: false
+            addEventModalVisible: false
         };
         return _this;
     }

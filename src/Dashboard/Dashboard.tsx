@@ -16,13 +16,13 @@ import Footer from "../NavigationFooter/Footer";
 import AddEvent from "../AddEvent/AddEvent";
 
 interface DashboardState {
-    modalVisible: boolean
+    addEventModalVisible: boolean
 }
 export default class Dashboard extends React.Component<null, DashboardState> {
     constructor(props) {
         super(props);
         this.state = {
-            modalVisible: false
+            addEventModalVisible: false
         };
     }
     public render () {
@@ -48,27 +48,30 @@ export default class Dashboard extends React.Component<null, DashboardState> {
             </View>
         )
     }
-    private setModalVisible = () => {
-        this.setState({modalVisible: !this.state.modalVisible});
+    private setAddEventModalVisible = () => {
+        this.setState({addEventModalVisible: !this.state.addEventModalVisible});
     }
     private addEvent = () => {
         // this.props.navigation.navigate('AddEventPage')
-        this.setModalVisible();
+        this.setAddEventModalVisible();
+    }
+    private manageGroups = () => {
+        alert('manageGroups');
     }
     private renderBottomOfPage = () => {
-        if(this.state.modalVisible) {
+        if(this.state.addEventModalVisible) {
             return (
                 <View style={styles.modalContainer}>
                     <Modal
                         animationType="slide"
                         transparent={false}
-                        visible={this.state.modalVisible}
+                        visible={this.state.addEventModalVisible}
                         onRequestClose={() => {
                             alert('Modal has been closed.');
                         }}>
                             <AddEvent
-                                onCancel={this.setModalVisible}
-                                onSubmit={null}
+                                onCancel={this.setAddEventModalVisible}
+                                onSubmit={this.manageGroups}
                             />
 
                     </Modal>
@@ -78,6 +81,7 @@ export default class Dashboard extends React.Component<null, DashboardState> {
         return (
             <Footer
                 onAddEvent={this.addEvent}
+                onManageGroups={this.manageGroups}
             />
         )
     }

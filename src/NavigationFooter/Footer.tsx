@@ -3,6 +3,7 @@ import {Platform, StyleSheet, Text, View, TextInput, Image, ImageBackground, Tou
 
 interface FooterProps {
     onAddEvent: () => null;
+    onManageGroups: () => null;
 }
 export default class Footer extends React.Component<FooterProps> {
     public render() {
@@ -18,7 +19,7 @@ export default class Footer extends React.Component<FooterProps> {
 
                     <TouchableOpacity
                         style={styles.footerButton}
-                        onPress={this.addEvent}
+                        onPress={this.props.onManageGroups}
                     >
                         <Text style={styles.addEventText}>Manage Groups</Text>
                     </TouchableOpacity>
