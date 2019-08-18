@@ -1,12 +1,20 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, TextInput, Image, ImageBackground, Button} from 'react-native';
+import {bindActionCreators, Dispatch} from "redux";
+import {signIn, SignInAction} from "../../Actions/Logon";
+import {connect} from "react-redux";
 
 type Props = {};
 interface State {
     text: string
     password: string
 }
-export default class LogonPage extends Component<Props, State> {
+interface PropsFromDispatch {
+    signIn: (userName: string, password: string) => SignInAction;
+}
+
+export type ComponentProps = Props & PropsFromDispatch;
+class LogonPage extends Component<ComponentProps, State> {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,13 +25,13 @@ export default class LogonPage extends Component<Props, State> {
     render() {
         const {navigate} = this.props.navigation;
         return (
-            <ImageBackground source={require('../../assets/WavyLeafBackground.jpg')} style={styles.container}>
+            <ImageBackground source={require('../../../assets/WavyLeafBackground.jpg')} style={styles.container}>
                 <View>
                     <TextInput
                         style={styles.input}
                         placeholder='Username'
                         placeholderTextColor='white'
-                        onChangeText={(text) => this.setState({text})}
+                        onChangeText={(text) => this.setState({email: text})}
                     />
                     <TextInput
                         style={styles.input}
@@ -46,12 +54,21 @@ export default class LogonPage extends Component<Props, State> {
         );
     }
     private signIn = () => {
-        this.props.navigation.navigate('DashboardPage')
+        this.props.signIn(this.state.email, this.state.password);
+        this.props.navigation.navigate('DashboardPage');
     }
     private signUp = () => {
         alert('Sign up')
     }
+
 }
+
+const mapDispatchToProps = (dispatch: Dispatch): PropsFromDispatch => ({
+    signIn: bindActionCreators(signIn, dispatch)
+});
+
+export default connect(null, mapDispatchToProps)(LogonPage)
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,

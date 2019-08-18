@@ -5,15 +5,17 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "run-ios": "react-native run-ios"
+    "ios": "react-native run-ios"
   },
   "dependencies": {
     "react": "16.6.1",
     "react-native": "0.57.7",
     "react-native-maps": "^0.22.1",
-    "react-navigation": "^2.2.4",
+    "react-navigation": "^2.18.3",
     "react-navigation-redux-helpers": "^1.1.2",
-    "react-redux": "^7.1.0",
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.4",
+    "redux-saga": "^1.0.5",
     "tslint": "^5.18.0",
     "typescript": "^3.5.3"
   },
@@ -21,7 +23,8 @@
     "babel-jest": "23.6.0",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.48.5",
-    "react-test-renderer": "16.6.1"
+    "react-test-renderer": "16.6.1",
+    "redux-devtools": "^3.5.0"
   },
   "jest": {
     "preset": "react-native"

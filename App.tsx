@@ -9,9 +9,14 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, TextInput, Image, ImageBackground, Button} from 'react-native';
 import { createStackNavigator } from 'react-navigation';
-import LogonPage from "./src/Logon/LogonPage";
-import Dashboard from './src/Dashboard/Dashboard'
-import AddEvent from "./src/AddEvent/AddEvent";
+import LogonPage from "./src/Components/Logon/LogonPage";
+import Dashboard from './src/Components/Dashboard/Dashboard'
+import AddEvent from "./src/Components/AddEvent/AddEvent";
+import {createStore} from "redux";
+import { Provider } from 'react-redux'
+import configureStore from './configureStore'
+import {AppIntroType} from "./src/Actions/Logon";
+
 
 const RootStack = createStackNavigator(
     {
@@ -31,11 +36,26 @@ const RootStack = createStackNavigator(
     },
 
 );
+export function todos(state = [], action) {
+    alert(JSON.stringify(action))
+    switch (action.type) {
+        case AppIntroType.SignIn:
+            alert('caught');
+            return state.concat([action.text])
+        default:
+            return state
+    }
+}
+// const store = createStore(todos)
+const store = configureStore();
 
 export default class App extends Component<null> {
   render() {
-    return <RootStack/>
-
+    return (
+        <Provider store={configureStore()}>
+            <RootStack/>
+        </Provider>
+    )
 
   }
 }

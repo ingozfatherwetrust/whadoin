@@ -61,6 +61,9 @@ export default class AddEvent extends React.Component<AddEventProps, addEventSta
                         placeholderTextColor='grey'
                         style={styles.eventInput}
                     />
+                    <TouchableOpacity>
+                        <Text style={{color: 'blue'}}>Add Friends</Text>
+                    </TouchableOpacity>
                     <View style={styles.textAreaContainer} >
                         <TextInput
                             style={styles.textArea}

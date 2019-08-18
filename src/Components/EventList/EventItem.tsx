@@ -13,7 +13,7 @@ export default class EventItem extends React.Component<EventProps> {
         return (
             <View style={styles.eventContainer}>
                 <View style={styles.eventHeader}>
-                    <Image source={require('../../assets/genericBatman.jpeg')} style={styles.eventProfilePic}/>
+                    <Image source={require('../../../assets/genericBatman.jpeg')} style={styles.eventProfilePic}/>
                     <View>
                         <Text style={styles.eventPosterName}>{this.props.userName}</Text>
                         <Text style={styles.timePosted}>3 hrs ago</Text>

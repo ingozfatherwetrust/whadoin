@@ -1,8 +1,11 @@
 "use strict";
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -20,7 +23,7 @@ var EventItem = /** @class */ (function (_super) {
     EventItem.prototype.render = function () {
         return (<react_native_1.View style={styles.eventContainer}>
                 <react_native_1.View style={styles.eventHeader}>
-                    <react_native_1.Image source={require('../../assets/genericBatman.jpeg')} style={styles.eventProfilePic}/>
+                    <react_native_1.Image source={require('../../../assets/genericBatman.jpeg')} style={styles.eventProfilePic}/>
                     <react_native_1.View>
                         <react_native_1.Text style={styles.eventPosterName}>{this.props.userName}</react_native_1.Text>
                         <react_native_1.Text style={styles.timePosted}>3 hrs ago</react_native_1.Text>

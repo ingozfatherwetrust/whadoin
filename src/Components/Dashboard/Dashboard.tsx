@@ -11,7 +11,7 @@ import {Platform,
     FlatList,
     Modal} from 'react-native';
 import EventItem from '../EventList/EventItem';
-import events from '../../assets/jsonFiles/events';
+import events from '../../../assets/jsonFiles/events';
 import Footer from "../NavigationFooter/Footer";
 import AddEvent from "../AddEvent/AddEvent";
 
