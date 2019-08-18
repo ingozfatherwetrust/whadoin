@@ -37,11 +37,10 @@ const RootStack = createStackNavigator(
 
 );
 export function todos(state = [], action) {
-    alert(JSON.stringify(action))
     switch (action.type) {
         case AppIntroType.SignIn:
             alert('caught');
-            return state.concat([action.text])
+            return state.concat([action.email])
         default:
             return state
     }

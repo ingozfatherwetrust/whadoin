@@ -44,11 +44,10 @@ var RootStack = react_navigation_1.createStackNavigator({
 });
 function todos(state, action) {
     if (state === void 0) { state = []; }
-    alert(JSON.stringify(action));
     switch (action.type) {
         case Logon_1.AppIntroType.SignIn:
             alert('caught');
-            return state.concat([action.text]);
+            return state.concat([action.email]);
         default:
             return state;
     }

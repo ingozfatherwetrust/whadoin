@@ -1,16 +1,14 @@
-import {applyMiddleware, createStore} from "redux";
+import {applyMiddleware, compose, createStore} from "redux";
 import createSagaMiddleware from 'redux-saga'
 import {todos} from "./App";
 import signInMain from './src/Sagas/SignIn'
+import main from "./src/Redux-Store/sagas";
+import sagas from './src/Redux-Store/sagas'
 
 const sagaMiddleware = createSagaMiddleware();
 
-const sagas = [
-    signInMain()
-];
-
 export default function configureStore() {
-    const store = createStore(todos, applyMiddleware(sagaMiddleware));
-    sagaMiddleware.run(signInMain);
+    const store = createStore(todos, compose(applyMiddleware(sagaMiddleware)));
+    sagaMiddleware.run(sagas);
     return store;
 }
