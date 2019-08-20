@@ -100,7 +100,9 @@ var styles = react_native_1.StyleSheet.create({
         height: 30,
         fontSize: 30,
         margin: 10,
-        color: 'black'
+        color: 'black',
+        paddingTop: 0,
+        paddingBottom: 0
     },
     container: {
         flex: 1,
