@@ -28,10 +28,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var effects_1 = require("redux-saga/effects");
+var Logon_1 = require("../Actions/Logon");
 function signIn(action) {
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, alert("signInSaga " + action)];
+            case 0: return [4 /*yield*/, alert("signInSaga: " + JSON.stringify(action))];
             case 1:
                 _a.sent();
                 return [2 /*return*/];
@@ -41,7 +42,7 @@ function signIn(action) {
 function signInMain() {
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, effects_1.takeEvery('*', signIn)];
+            case 0: return [4 /*yield*/, effects_1.takeEvery(Logon_1.AppIntroType.SignIn, signIn)];
             case 1:
                 _a.sent();
                 return [2 /*return*/];

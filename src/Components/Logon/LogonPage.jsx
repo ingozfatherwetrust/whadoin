@@ -41,9 +41,13 @@ var LogonPage = /** @class */ (function (_super) {
         return (<react_native_1.ImageBackground source={require('../../../assets/WavyLeafBackground.jpg')} style={styles.container}>
                 <react_native_1.View>
                     <react_native_1.TextInput style={styles.input} placeholder='Username' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ email: text }); }}/>
-                    <react_native_1.TextInput style={styles.input} placeholder='Password' placeholderTextColor='white' secureTextEntry={true}/>
-                    <react_native_1.Button title='Sign In' onPress={this.signIn} color='white'/>
-                    <react_native_1.Button title='Sign Up' onPress={this.signUp} color='white'/>
+                    <react_native_1.TextInput style={styles.input} placeholder='Password' placeholderTextColor='white' secureTextEntry={true} onChangeText={function (text) { return _this.setState({ password: text }); }}/>
+                    <react_native_1.TouchableOpacity style={styles.button} onPress={this.signIn}>
+                        <react_native_1.Text style={styles.buttonText}>Sign In</react_native_1.Text>
+                    </react_native_1.TouchableOpacity>
+                    <react_native_1.TouchableOpacity style={styles.button} onPress={this.signUp}>
+                        <react_native_1.Text style={styles.buttonText}>Sign Up</react_native_1.Text>
+                    </react_native_1.TouchableOpacity>
                 </react_native_1.View>
             </react_native_1.ImageBackground>);
     };
@@ -72,5 +76,13 @@ var styles = react_native_1.StyleSheet.create({
         color: 'white',
         fontSize: 20
     },
-    button: {}
+    button: {
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        padding: 5
+    },
+    buttonText: {
+        color: 'white',
+        fontSize: 20
+    }
 });

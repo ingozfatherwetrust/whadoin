@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TextInput, Image, ImageBackground, Button} from 'react-native';
+import {Platform, StyleSheet, Text, View, TextInput, Image, ImageBackground, Button, TouchableOpacity} from 'react-native';
 import {bindActionCreators, Dispatch} from "redux";
 import {signIn, SignInAction} from "../../Actions/Logon";
 import {connect} from "react-redux";
@@ -38,17 +38,20 @@ class LogonPage extends Component<ComponentProps, State> {
                         placeholder='Password'
                         placeholderTextColor='white'
                         secureTextEntry={true}
+                        onChangeText={(text) => this.setState({password: text})}
                     />
-                    <Button
-                        title='Sign In'
+                    <TouchableOpacity
+                        style={styles.button}
                         onPress={this.signIn}
-                        color='white'
-                    />
-                    <Button
-                        title='Sign Up'
+                    >
+                        <Text style={styles.buttonText}>Sign In</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.button}
                         onPress={this.signUp}
-                        color='white'
-                    />
+                    >
+                        <Text style={styles.buttonText}>Sign Up</Text>
+                    </TouchableOpacity>
                 </View>
             </ImageBackground>
         );
@@ -89,7 +92,13 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     button: {
-
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        padding: 5
+    },
+    buttonText: {
+        color: 'white',
+        fontSize: 20
     }
 
 });

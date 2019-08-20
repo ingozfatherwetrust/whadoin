@@ -46,7 +46,7 @@ function todos(state, action) {
     if (state === void 0) { state = []; }
     switch (action.type) {
         case Logon_1.AppIntroType.SignIn:
-            alert('caught');
+            console.log('state', state);
             return state.concat([action.email]);
         default:
             return state;
