@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, TextInput, Image, ImageBackground, TouchableOpacity} from 'react-native';
-import MapView from "react-native-maps";
 
 interface EventProps {
     userName: string;

@@ -10,9 +10,9 @@
     "android": "react-native run-android"
   },
   "dependencies": {
+    "jsc-android": "^241213.1.0",
     "react": "16.8.6",
     "react-native": "0.60.5",
-    "react-native-maps": "^0.22.1",
     "react-navigation": "^2.18.3",
     "react-navigation-redux-helpers": "^1.1.2",
     "react-redux": "^6.0.1",
