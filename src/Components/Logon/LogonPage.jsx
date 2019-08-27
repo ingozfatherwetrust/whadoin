@@ -18,37 +18,58 @@ var react_native_1 = require("react-native");
 var redux_1 = require("redux");
 var Logon_1 = require("../../Actions/Logon");
 var react_redux_1 = require("react-redux");
+var react_native_firebase_1 = require("react-native-firebase");
 var LogonPage = /** @class */ (function (_super) {
     __extends(LogonPage, _super);
     function LogonPage(props) {
         var _this = _super.call(this, props) || this;
+        _this.renderSignUp = function () {
+            return (<react_native_1.View>
+                <react_native_1.TextInput style={styles.input} placeholder='Email Address' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ email: text }); }}/>
+                <react_native_1.TextInput style={styles.input} placeholder='Profile Name' placeholderTextColor='white' secureTextEntry={true} onChangeText={function (text) { return _this.setState({ profileName: text }); }}/>
+                <react_native_1.TextInput style={styles.input} placeholder='Phone Number' placeholderTextColor='white' secureTextEntry={true} onChangeText={function (text) { return _this.setState({ phoneNumber: text }); }}/>
+                <react_native_1.TextInput style={styles.input} placeholder='Password' placeholderTextColor='white' secureTextEntry={true} onChangeText={function (text) { return _this.setState({ password: text }); }}/>
+                <react_native_1.TouchableOpacity style={styles.button} onPress={_this.signIn}>
+                    <react_native_1.Text style={styles.buttonText}>Sign In</react_native_1.Text>
+                </react_native_1.TouchableOpacity>
+                <react_native_1.TouchableOpacity style={styles.button} onPress={_this.signUp}>
+                    <react_native_1.Text style={styles.buttonText}>Sign Up</react_native_1.Text>
+                </react_native_1.TouchableOpacity>
+            </react_native_1.View>);
+        };
+        _this.renderBottomText = function () {
+            return (<react_native_1.TouchableOpacity style={styles.bottomButton}>
+                <react_native_1.Text style={styles.bottomText}>Already a member? Sign in</react_native_1.Text>
+            </react_native_1.TouchableOpacity>);
+        };
         _this.signIn = function () {
             _this.props.signIn(_this.state.email, _this.state.password);
             _this.props.navigation.navigate('DashboardPage');
         };
         _this.signUp = function () {
-            alert('Sign up');
+            react_native_firebase_1.default.auth().createUserWithEmailAndPassword(_this.state.email, _this.state.password)
+                .then(function (cb) {
+                debugger;
+                console.log(cb);
+            }).catch(function (err) {
+                debugger;
+                console.log(err);
+            });
         };
         _this.state = {
             email: '',
-            password: ''
+            password: '',
+            phoneNumber: '',
+            profileName: '',
+            isSignIn: true
         };
         return _this;
     }
     LogonPage.prototype.render = function () {
-        var _this = this;
         var navigate = this.props.navigation.navigate;
         return (<react_native_1.ImageBackground source={require('../../../assets/WavyLeafBackground.jpg')} style={styles.container}>
-                <react_native_1.View>
-                    <react_native_1.TextInput style={styles.input} placeholder='Username' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ email: text }); }}/>
-                    <react_native_1.TextInput style={styles.input} placeholder='Password' placeholderTextColor='white' secureTextEntry={true} onChangeText={function (text) { return _this.setState({ password: text }); }}/>
-                    <react_native_1.TouchableOpacity style={styles.button} onPress={this.signIn}>
-                        <react_native_1.Text style={styles.buttonText}>Sign In</react_native_1.Text>
-                    </react_native_1.TouchableOpacity>
-                    <react_native_1.TouchableOpacity style={styles.button} onPress={this.signUp}>
-                        <react_native_1.Text style={styles.buttonText}>Sign Up</react_native_1.Text>
-                    </react_native_1.TouchableOpacity>
-                </react_native_1.View>
+                {this.renderSignUp()}
+                {this.renderBottomText()}
             </react_native_1.ImageBackground>);
     };
     return LogonPage;
@@ -61,7 +82,7 @@ var styles = react_native_1.StyleSheet.create({
     container: {
         flex: 1,
         resizeMode: 'cover',
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -84,5 +105,15 @@ var styles = react_native_1.StyleSheet.create({
     buttonText: {
         color: 'white',
         fontSize: 20
+    },
+    bottomText: {
+        color: 'white',
+        fontSize: 14,
+    },
+    bottomButton: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderBottomColor: 'white',
+        borderBottomWidth: 1
     }
 });

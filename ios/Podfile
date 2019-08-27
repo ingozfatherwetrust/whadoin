@@ -23,6 +23,15 @@ target 'whadoin' do
   pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+  # Firbase Pods
+  # add pods for any other desired Firebase products
+  # https://firebase.google.com/docs/ios/setup#available-pods
+  pod 'RNFirebase', :path => '../node_modules/react-native-firebase/ios'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Auth'
+  # Required by RNFirebase
+  pod 'Firebase/Core', '~> 6.3.0'
+
   target 'whadoinTests' do
     inherit! :search_paths
     # Pods for testing

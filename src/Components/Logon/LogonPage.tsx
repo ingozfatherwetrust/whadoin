@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, TextInput, Image, ImageBackground, Button, TouchableOpacity} from 'react-native';
 import {bindActionCreators, Dispatch} from "redux";
-import {signIn, SignInAction} from "../../Actions/Logon";
+import {AppIntroType, signIn, SignInAction} from "../../Actions/Logon";
 import {connect} from "react-redux";
+import firebase from "react-native-firebase";
 
 type Props = {};
 interface State {
@@ -19,49 +20,89 @@ class LogonPage extends Component<ComponentProps, State> {
         super(props);
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            phoneNumber: '',
+            profileName: '',
+            isSignIn: true
+
         };
     }
     render() {
         const {navigate} = this.props.navigation;
         return (
             <ImageBackground source={require('../../../assets/WavyLeafBackground.jpg')} style={styles.container}>
-                <View>
-                    <TextInput
-                        style={styles.input}
-                        placeholder='Username'
-                        placeholderTextColor='white'
-                        onChangeText={(text) => this.setState({email: text})}
-                    />
-                    <TextInput
-                        style={styles.input}
-                        placeholder='Password'
-                        placeholderTextColor='white'
-                        secureTextEntry={true}
-                        onChangeText={(text) => this.setState({password: text})}
-                    />
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={this.signIn}
-                    >
-                        <Text style={styles.buttonText}>Sign In</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={this.signUp}
-                    >
-                        <Text style={styles.buttonText}>Sign Up</Text>
-                    </TouchableOpacity>
-                </View>
+                {this.renderSignUp()}
+                {this.renderBottomText()}
             </ImageBackground>
         );
+    }
+    private renderSignUp = () => {
+        return (
+            <View>
+                <TextInput
+                    style={styles.input}
+                    placeholder='Email Address'
+                    placeholderTextColor='white'
+                    onChangeText={(text) => this.setState({email: text})}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder='Profile Name'
+                    placeholderTextColor='white'
+                    secureTextEntry={true}
+                    onChangeText={(text) => this.setState({profileName: text})}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder='Phone Number'
+                    placeholderTextColor='white'
+                    secureTextEntry={true}
+                    onChangeText={(text) => this.setState({phoneNumber: text})}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder='Password'
+                    placeholderTextColor='white'
+                    secureTextEntry={true}
+                    onChangeText={(text) => this.setState({password: text})}
+                />
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={this.signIn}
+                >
+                    <Text style={styles.buttonText}>Sign In</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={this.signUp}
+                >
+                    <Text style={styles.buttonText}>Sign Up</Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
+    private renderBottomText = () => {
+        return(
+            <TouchableOpacity style={styles.bottomButton}>
+                <Text style={styles.bottomText}>Already a member? Sign in</Text>
+            </TouchableOpacity>
+        )
     }
     private signIn = () => {
         this.props.signIn(this.state.email, this.state.password);
         this.props.navigation.navigate('DashboardPage');
     }
     private signUp = () => {
-        alert('Sign up')
+        firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+            .then((cb) => {
+                debugger;
+                console.log(cb);
+            }).catch((err) => {
+                debugger;
+                console.log(err);
+            })
+
+
     }
 
 }
@@ -76,7 +117,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         resizeMode: 'cover',
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -99,6 +140,16 @@ const styles = StyleSheet.create({
     buttonText: {
         color: 'white',
         fontSize: 20
+    },
+    bottomText: {
+        color: 'white',
+        fontSize: 14,
+    },
+    bottomButton: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderBottomColor: 'white',
+        borderBottomWidth: 1
     }
 
 });
