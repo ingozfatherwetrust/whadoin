@@ -19,6 +19,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = require("react");
 var react_navigation_1 = require("react-navigation");
@@ -42,16 +53,22 @@ var RootStack = react_navigation_1.createStackNavigator({
         },
     }
 });
+var initialState = {
+    userName: '',
+    email: '',
+    password: '',
+    phoneNumber: ''
+};
 function todos(state, action) {
-    if (state === void 0) { state = []; }
+    if (state === void 0) { state = initialState; }
     switch (action.type) {
         case Logon_1.AppIntroType.SignIn:
+            // let {userName, password} = action;
             console.log('state', state);
-            return state.concat([action.email]);
+            return __assign({}, state, { userName: action.userName, password: action.password });
         case Logon_1.AppIntroType.SignUp:
-            console.log('action', action);
-            console.log('state', state);
-            return state.concat([action.email]);
+            var userName = action.userName, email = action.email, password = action.password, phoneNumber = action.phoneNumber;
+            return __assign({}, state, { userName: userName, email: email, password: password, phoneNumber: phoneNumber });
         default:
             return state;
     }

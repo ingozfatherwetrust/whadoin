@@ -8,8 +8,9 @@ function* signIn(action) {
 
 function* signUp(action: SignUpAction) {
     yield firebase.auth().createUserWithEmailAndPassword(action.email, action.password)
-        .then((cb) => {
-            console.log(cb);
+        .then((user) => {
+            console.log(user);
+            console.log('uid', user.user._user.uid);
             debugger;
         }).catch((err) => {
             console.log(err);

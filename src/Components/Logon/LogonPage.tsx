@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, TextInput, Image, ImageBackground, Button, TouchableOpacity} from 'react-native';
 import {bindActionCreators, Dispatch} from "redux";
-import {signIn, SignInAction, signUp} from "../../Actions/Logon";
+import {signIn, SignInAction, signUp, SignUpAction} from "../../Actions/Logon";
 import {connect} from "react-redux";
 
 type Props = {};
@@ -11,7 +11,7 @@ interface State {
 }
 interface PropsFromDispatch {
     signIn: (userName: string, password: string) => SignInAction;
-    signUp: (email: string, userName: string, phoneNumber: string, password: string) => SignInAction;
+    signUp: (email: string, userName: string, phoneNumber: string, password: string) => SignUpAction;
 }
 
 export type ComponentProps = Props & PropsFromDispatch;
@@ -22,7 +22,7 @@ class LogonPage extends Component<ComponentProps, State> {
             email: '',
             password: '',
             phoneNumber: '',
-            profileName: '',
+            userName: '',
             isSignUp: true
 
         };
@@ -69,7 +69,7 @@ class LogonPage extends Component<ComponentProps, State> {
                     style={styles.input}
                     placeholder='Profile Name'
                     placeholderTextColor='white'
-                    onChangeText={(text) => this.setState({profileName: text})}
+                    onChangeText={(text) => this.setState({userName: text})}
                 />
                 <TextInput
                     style={styles.input}
