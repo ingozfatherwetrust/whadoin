@@ -44,8 +44,9 @@ function signUp(action) {
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, react_native_firebase_1.default.auth().createUserWithEmailAndPassword(action.email, action.password)
-                    .then(function (cb) {
-                    console.log(cb);
+                    .then(function (user) {
+                    console.log(user);
+                    console.log('uid', user.user._user.uid);
                     debugger;
                 }).catch(function (err) {
                     console.log(err);

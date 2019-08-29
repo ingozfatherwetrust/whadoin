@@ -31,7 +31,7 @@ var LogonPage = /** @class */ (function (_super) {
         _this.renderSignUp = function () {
             return (<react_native_1.View>
                 <react_native_1.TextInput style={styles.input} placeholder='Email Address' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ email: text }); }}/>
-                <react_native_1.TextInput style={styles.input} placeholder='Profile Name' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ profileName: text }); }}/>
+                <react_native_1.TextInput style={styles.input} placeholder='Profile Name' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ userName: text }); }}/>
                 <react_native_1.TextInput style={styles.input} placeholder='Phone Number' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ phoneNumber: text }); }}/>
                 <react_native_1.TextInput style={styles.input} placeholder='Password' placeholderTextColor='white' secureTextEntry={true} onChangeText={function (text) { return _this.setState({ password: text }); }}/>
 
@@ -63,7 +63,7 @@ var LogonPage = /** @class */ (function (_super) {
             email: '',
             password: '',
             phoneNumber: '',
-            profileName: '',
+            userName: '',
             isSignUp: true
         };
         return _this;

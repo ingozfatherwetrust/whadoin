@@ -8,7 +8,13 @@ import sagas from './src/Redux-Store/sagas'
 const sagaMiddleware = createSagaMiddleware();
 
 export default function configureStore() {
-    const store = createStore(todos, compose(applyMiddleware(sagaMiddleware)));
+    let initialState = {
+        userName: '',
+        email: '',
+        password: '',
+        phoneNumber: ''
+    }
+    const store = createStore(todos, initialState, compose(applyMiddleware(sagaMiddleware), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
     sagaMiddleware.run(sagas);
     return store;
 }
