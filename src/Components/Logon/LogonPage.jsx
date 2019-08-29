@@ -18,7 +18,6 @@ var react_native_1 = require("react-native");
 var redux_1 = require("redux");
 var Logon_1 = require("../../Actions/Logon");
 var react_redux_1 = require("react-redux");
-var react_native_firebase_1 = require("react-native-firebase");
 var LogonPage = /** @class */ (function (_super) {
     __extends(LogonPage, _super);
     function LogonPage(props) {
@@ -26,8 +25,8 @@ var LogonPage = /** @class */ (function (_super) {
         _this.renderSignUp = function () {
             return (<react_native_1.View>
                 <react_native_1.TextInput style={styles.input} placeholder='Email Address' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ email: text }); }}/>
-                <react_native_1.TextInput style={styles.input} placeholder='Profile Name' placeholderTextColor='white' secureTextEntry={true} onChangeText={function (text) { return _this.setState({ profileName: text }); }}/>
-                <react_native_1.TextInput style={styles.input} placeholder='Phone Number' placeholderTextColor='white' secureTextEntry={true} onChangeText={function (text) { return _this.setState({ phoneNumber: text }); }}/>
+                <react_native_1.TextInput style={styles.input} placeholder='Profile Name' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ profileName: text }); }}/>
+                <react_native_1.TextInput style={styles.input} placeholder='Phone Number' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ phoneNumber: text }); }}/>
                 <react_native_1.TextInput style={styles.input} placeholder='Password' placeholderTextColor='white' secureTextEntry={true} onChangeText={function (text) { return _this.setState({ password: text }); }}/>
                 <react_native_1.TouchableOpacity style={styles.button} onPress={_this.signIn}>
                     <react_native_1.Text style={styles.buttonText}>Sign In</react_native_1.Text>
@@ -47,21 +46,15 @@ var LogonPage = /** @class */ (function (_super) {
             _this.props.navigation.navigate('DashboardPage');
         };
         _this.signUp = function () {
-            react_native_firebase_1.default.auth().createUserWithEmailAndPassword(_this.state.email, _this.state.password)
-                .then(function (cb) {
-                debugger;
-                console.log(cb);
-            }).catch(function (err) {
-                debugger;
-                console.log(err);
-            });
+            _this.props.signUp(_this.state.email, _this.state.userName, _this.state.phoneNumber, _this.state.password);
+            _this.props.navigation.navigate('DashboardPage');
         };
         _this.state = {
             email: '',
             password: '',
             phoneNumber: '',
             profileName: '',
-            isSignIn: true
+            isSignUp: true
         };
         return _this;
     }
@@ -75,7 +68,8 @@ var LogonPage = /** @class */ (function (_super) {
     return LogonPage;
 }(react_1.Component));
 var mapDispatchToProps = function (dispatch) { return ({
-    signIn: redux_1.bindActionCreators(Logon_1.signIn, dispatch)
+    signIn: redux_1.bindActionCreators(Logon_1.signIn, dispatch),
+    signUp: redux_1.bindActionCreators(Logon_1.signUp, dispatch)
 }); };
 exports.default = react_redux_1.connect(null, mapDispatchToProps)(LogonPage);
 var styles = react_native_1.StyleSheet.create({

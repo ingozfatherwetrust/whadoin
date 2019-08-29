@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, TextInput, Image, ImageBackground, Button, TouchableOpacity} from 'react-native';
 import {bindActionCreators, Dispatch} from "redux";
-import {AppIntroType, signIn, SignInAction} from "../../Actions/Logon";
+import {AppIntroType, signIn, SignInAction, signUp} from "../../Actions/Logon";
 import {connect} from "react-redux";
 import firebase from "react-native-firebase";
 
@@ -12,6 +12,7 @@ interface State {
 }
 interface PropsFromDispatch {
     signIn: (userName: string, password: string) => SignInAction;
+    signUp: (email: string, userName: string, phoneNumber: string, password: string) => SignInAction;
 }
 
 export type ComponentProps = Props & PropsFromDispatch;
@@ -23,7 +24,7 @@ class LogonPage extends Component<ComponentProps, State> {
             password: '',
             phoneNumber: '',
             profileName: '',
-            isSignIn: true
+            isSignUp: true
 
         };
     }
@@ -49,14 +50,12 @@ class LogonPage extends Component<ComponentProps, State> {
                     style={styles.input}
                     placeholder='Profile Name'
                     placeholderTextColor='white'
-                    secureTextEntry={true}
                     onChangeText={(text) => this.setState({profileName: text})}
                 />
                 <TextInput
                     style={styles.input}
                     placeholder='Phone Number'
                     placeholderTextColor='white'
-                    secureTextEntry={true}
                     onChangeText={(text) => this.setState({phoneNumber: text})}
                 />
                 <TextInput
@@ -93,22 +92,16 @@ class LogonPage extends Component<ComponentProps, State> {
         this.props.navigation.navigate('DashboardPage');
     }
     private signUp = () => {
-        firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-            .then((cb) => {
-                debugger;
-                console.log(cb);
-            }).catch((err) => {
-                debugger;
-                console.log(err);
-            })
-
+        this.props.signUp(this.state.email, this.state.userName, this.state.phoneNumber, this.state.password);
+        this.props.navigation.navigate('DashboardPage');
 
     }
 
 }
 
 const mapDispatchToProps = (dispatch: Dispatch): PropsFromDispatch => ({
-    signIn: bindActionCreators(signIn, dispatch)
+    signIn: bindActionCreators(signIn, dispatch),
+    signUp: bindActionCreators(signUp, dispatch)
 });
 
 export default connect(null, mapDispatchToProps)(LogonPage)

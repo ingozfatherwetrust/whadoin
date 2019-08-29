@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var AppIntroType;
 (function (AppIntroType) {
     AppIntroType["SignIn"] = "SIGN_IN";
-    AppIntroType[AppIntroType["SignUp"] = void 0] = "SignUp";
+    AppIntroType["SignUp"] = "SIGN_UP";
 })(AppIntroType = exports.AppIntroType || (exports.AppIntroType = {}));
 function signIn(userName, password) {
     return {
@@ -13,3 +13,13 @@ function signIn(userName, password) {
     };
 }
 exports.signIn = signIn;
+function signUp(email, userName, phoneNumber, password) {
+    return {
+        type: AppIntroType.SignUp,
+        email: email,
+        userName: userName,
+        phoneNumber: phoneNumber,
+        password: password
+    };
+}
+exports.signUp = signUp;

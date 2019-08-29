@@ -29,10 +29,28 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var effects_1 = require("redux-saga/effects");
 var Logon_1 = require("../Actions/Logon");
+var react_native_firebase_1 = require("react-native-firebase");
 function signIn(action) {
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, alert("signInSaga: " + JSON.stringify(action))];
+            case 1:
+                _a.sent();
+                return [2 /*return*/];
+        }
+    });
+}
+function signUp(action) {
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, react_native_firebase_1.default.auth().createUserWithEmailAndPassword(action.email, action.password)
+                    .then(function (cb) {
+                    console.log(cb);
+                    debugger;
+                }).catch(function (err) {
+                    console.log(err);
+                    debugger;
+                })];
             case 1:
                 _a.sent();
                 return [2 /*return*/];
@@ -44,6 +62,9 @@ function signInMain() {
         switch (_a.label) {
             case 0: return [4 /*yield*/, effects_1.takeEvery(Logon_1.AppIntroType.SignIn, signIn)];
             case 1:
+                _a.sent();
+                return [4 /*yield*/, effects_1.takeEvery(Logon_1.AppIntroType.SignUp, signUp)];
+            case 2:
                 _a.sent();
                 return [2 /*return*/];
         }
