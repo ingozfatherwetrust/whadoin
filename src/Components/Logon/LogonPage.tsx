@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, TextInput, Image, ImageBackground, Button, TouchableOpacity} from 'react-native';
 import {bindActionCreators, Dispatch} from "redux";
-import {AppIntroType, signIn, SignInAction} from "../../Actions/Logon";
+import {signIn, SignInAction, signUp} from "../../Actions/Logon";
 import {connect} from "react-redux";
-import firebase from "react-native-firebase";
 
 type Props = {};
 interface State {
@@ -12,6 +11,7 @@ interface State {
 }
 interface PropsFromDispatch {
     signIn: (userName: string, password: string) => SignInAction;
+    signUp: (email: string, userName: string, phoneNumber: string, password: string) => SignInAction;
 }
 
 export type ComponentProps = Props & PropsFromDispatch;
@@ -23,18 +23,38 @@ class LogonPage extends Component<ComponentProps, State> {
             password: '',
             phoneNumber: '',
             profileName: '',
-            isSignIn: true
+            isSignUp: true
 
         };
     }
     render() {
-        const {navigate} = this.props.navigation;
+        let {isSignUp} = this.state;
         return (
             <ImageBackground source={require('../../../assets/WavyLeafBackground.jpg')} style={styles.container}>
-                {this.renderSignUp()}
+                {isSignUp ? this.renderSignUp() : this.renderSignIn()}
+                {this.renderSignInSignUpButton()}
                 {this.renderBottomText()}
             </ImageBackground>
         );
+    }
+    private renderSignIn = () => {
+        return(
+            <View>
+                <TextInput
+                    style={styles.input}
+                    placeholder='Email or Phone Number'
+                    placeholderTextColor='white'
+                    onChangeText={(text) => this.setState({email: text})}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder='Password'
+                    placeholderTextColor='white'
+                    secureTextEntry={true}
+                    onChangeText={(text) => this.setState({password: text})}
+                />
+            </View>
+        )
     }
     private renderSignUp = () => {
         return (
@@ -49,14 +69,12 @@ class LogonPage extends Component<ComponentProps, State> {
                     style={styles.input}
                     placeholder='Profile Name'
                     placeholderTextColor='white'
-                    secureTextEntry={true}
                     onChangeText={(text) => this.setState({profileName: text})}
                 />
                 <TextInput
                     style={styles.input}
                     placeholder='Phone Number'
                     placeholderTextColor='white'
-                    secureTextEntry={true}
                     onChangeText={(text) => this.setState({phoneNumber: text})}
                 />
                 <TextInput
@@ -66,25 +84,31 @@ class LogonPage extends Component<ComponentProps, State> {
                     secureTextEntry={true}
                     onChangeText={(text) => this.setState({password: text})}
                 />
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={this.signIn}
-                >
-                    <Text style={styles.buttonText}>Sign In</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={this.signUp}
-                >
-                    <Text style={styles.buttonText}>Sign Up</Text>
-                </TouchableOpacity>
+
             </View>
         )
-    }
+    };
+    private renderSignInSignUpButton = () => {
+        return (
+            <TouchableOpacity
+                style={styles.button}
+                onPress={this.state.isSignUp ? this.signUp :this.signIn}
+            >
+                <Text style={styles.buttonText}>{this.state.isSignUp ? 'Sign Up' : 'Sign In'}</Text>
+            </TouchableOpacity>
+        )
+    };
     private renderBottomText = () => {
+        let {isSignUp} = this.state;
+        let signInBottom = 'Already a member? Sign in';
+        let signUpBottom = 'Not a member? Sign up!';
+        let bottomText = isSignUp ? signInBottom : signUpBottom;
         return(
-            <TouchableOpacity style={styles.bottomButton}>
-                <Text style={styles.bottomText}>Already a member? Sign in</Text>
+            <TouchableOpacity
+                style={styles.bottomButton}
+                onPress={() => this.setState({isSignUp: !isSignUp})}
+            >
+                <Text style={styles.bottomText} >{bottomText}</Text>
             </TouchableOpacity>
         )
     }
@@ -93,22 +117,16 @@ class LogonPage extends Component<ComponentProps, State> {
         this.props.navigation.navigate('DashboardPage');
     }
     private signUp = () => {
-        firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-            .then((cb) => {
-                debugger;
-                console.log(cb);
-            }).catch((err) => {
-                debugger;
-                console.log(err);
-            })
-
+        this.props.signUp(this.state.email, this.state.userName, this.state.phoneNumber, this.state.password);
+        this.props.navigation.navigate('DashboardPage');
 
     }
 
 }
 
 const mapDispatchToProps = (dispatch: Dispatch): PropsFromDispatch => ({
-    signIn: bindActionCreators(signIn, dispatch)
+    signIn: bindActionCreators(signIn, dispatch),
+    signUp: bindActionCreators(signUp, dispatch)
 });
 
 export default connect(null, mapDispatchToProps)(LogonPage)
@@ -149,7 +167,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderBottomColor: 'white',
-        borderBottomWidth: 1
+        borderBottomWidth: 1,
+        marginTop: 15
     }
 
 });

@@ -18,28 +18,37 @@ var react_native_1 = require("react-native");
 var redux_1 = require("redux");
 var Logon_1 = require("../../Actions/Logon");
 var react_redux_1 = require("react-redux");
-var react_native_firebase_1 = require("react-native-firebase");
 var LogonPage = /** @class */ (function (_super) {
     __extends(LogonPage, _super);
     function LogonPage(props) {
         var _this = _super.call(this, props) || this;
+        _this.renderSignIn = function () {
+            return (<react_native_1.View>
+                <react_native_1.TextInput style={styles.input} placeholder='Email or Phone Number' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ email: text }); }}/>
+                <react_native_1.TextInput style={styles.input} placeholder='Password' placeholderTextColor='white' secureTextEntry={true} onChangeText={function (text) { return _this.setState({ password: text }); }}/>
+            </react_native_1.View>);
+        };
         _this.renderSignUp = function () {
             return (<react_native_1.View>
                 <react_native_1.TextInput style={styles.input} placeholder='Email Address' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ email: text }); }}/>
-                <react_native_1.TextInput style={styles.input} placeholder='Profile Name' placeholderTextColor='white' secureTextEntry={true} onChangeText={function (text) { return _this.setState({ profileName: text }); }}/>
-                <react_native_1.TextInput style={styles.input} placeholder='Phone Number' placeholderTextColor='white' secureTextEntry={true} onChangeText={function (text) { return _this.setState({ phoneNumber: text }); }}/>
+                <react_native_1.TextInput style={styles.input} placeholder='Profile Name' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ profileName: text }); }}/>
+                <react_native_1.TextInput style={styles.input} placeholder='Phone Number' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ phoneNumber: text }); }}/>
                 <react_native_1.TextInput style={styles.input} placeholder='Password' placeholderTextColor='white' secureTextEntry={true} onChangeText={function (text) { return _this.setState({ password: text }); }}/>
-                <react_native_1.TouchableOpacity style={styles.button} onPress={_this.signIn}>
-                    <react_native_1.Text style={styles.buttonText}>Sign In</react_native_1.Text>
-                </react_native_1.TouchableOpacity>
-                <react_native_1.TouchableOpacity style={styles.button} onPress={_this.signUp}>
-                    <react_native_1.Text style={styles.buttonText}>Sign Up</react_native_1.Text>
-                </react_native_1.TouchableOpacity>
+
             </react_native_1.View>);
         };
+        _this.renderSignInSignUpButton = function () {
+            return (<react_native_1.TouchableOpacity style={styles.button} onPress={_this.state.isSignUp ? _this.signUp : _this.signIn}>
+                <react_native_1.Text style={styles.buttonText}>{_this.state.isSignUp ? 'Sign Up' : 'Sign In'}</react_native_1.Text>
+            </react_native_1.TouchableOpacity>);
+        };
         _this.renderBottomText = function () {
-            return (<react_native_1.TouchableOpacity style={styles.bottomButton}>
-                <react_native_1.Text style={styles.bottomText}>Already a member? Sign in</react_native_1.Text>
+            var isSignUp = _this.state.isSignUp;
+            var signInBottom = 'Already a member? Sign in';
+            var signUpBottom = 'Not a member? Sign up!';
+            var bottomText = isSignUp ? signInBottom : signUpBottom;
+            return (<react_native_1.TouchableOpacity style={styles.bottomButton} onPress={function () { return _this.setState({ isSignUp: !isSignUp }); }}>
+                <react_native_1.Text style={styles.bottomText}>{bottomText}</react_native_1.Text>
             </react_native_1.TouchableOpacity>);
         };
         _this.signIn = function () {
@@ -47,35 +56,31 @@ var LogonPage = /** @class */ (function (_super) {
             _this.props.navigation.navigate('DashboardPage');
         };
         _this.signUp = function () {
-            react_native_firebase_1.default.auth().createUserWithEmailAndPassword(_this.state.email, _this.state.password)
-                .then(function (cb) {
-                debugger;
-                console.log(cb);
-            }).catch(function (err) {
-                debugger;
-                console.log(err);
-            });
+            _this.props.signUp(_this.state.email, _this.state.userName, _this.state.phoneNumber, _this.state.password);
+            _this.props.navigation.navigate('DashboardPage');
         };
         _this.state = {
             email: '',
             password: '',
             phoneNumber: '',
             profileName: '',
-            isSignIn: true
+            isSignUp: true
         };
         return _this;
     }
     LogonPage.prototype.render = function () {
-        var navigate = this.props.navigation.navigate;
+        var isSignUp = this.state.isSignUp;
         return (<react_native_1.ImageBackground source={require('../../../assets/WavyLeafBackground.jpg')} style={styles.container}>
-                {this.renderSignUp()}
+                {isSignUp ? this.renderSignUp() : this.renderSignIn()}
+                {this.renderSignInSignUpButton()}
                 {this.renderBottomText()}
             </react_native_1.ImageBackground>);
     };
     return LogonPage;
 }(react_1.Component));
 var mapDispatchToProps = function (dispatch) { return ({
-    signIn: redux_1.bindActionCreators(Logon_1.signIn, dispatch)
+    signIn: redux_1.bindActionCreators(Logon_1.signIn, dispatch),
+    signUp: redux_1.bindActionCreators(Logon_1.signUp, dispatch)
 }); };
 exports.default = react_redux_1.connect(null, mapDispatchToProps)(LogonPage);
 var styles = react_native_1.StyleSheet.create({
@@ -114,6 +119,7 @@ var styles = react_native_1.StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderBottomColor: 'white',
-        borderBottomWidth: 1
+        borderBottomWidth: 1,
+        marginTop: 15
     }
 });

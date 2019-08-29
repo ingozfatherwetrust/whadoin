@@ -48,6 +48,10 @@ function todos(state, action) {
         case Logon_1.AppIntroType.SignIn:
             console.log('state', state);
             return state.concat([action.email]);
+        case Logon_1.AppIntroType.SignUp:
+            console.log('action', action);
+            console.log('state', state);
+            return state.concat([action.email]);
         default:
             return state;
     }

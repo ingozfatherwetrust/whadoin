@@ -39,8 +39,12 @@ const RootStack = createStackNavigator(
 export function todos(state = [], action) {
     switch (action.type) {
         case AppIntroType.SignIn:
-            console.log('state', state)
-            return state.concat([action.email])
+            console.log('state', state);
+            return state.concat([action.email]);
+        case AppIntroType.SignUp:
+            console.log('action', action);
+            console.log('state', state);
+            return state.concat([action.email]);
         default:
             return state
     }
