@@ -5,45 +5,51 @@ interface FooterProps {
     onAddEvent: () => null;
     onManageGroups: () => null;
 }
+enum ButtonStyles {
+    SELECTED_BUTTON,
+    NON_SELECTED_BUTTON,
+    ADD_EVENT_BUTTON
+
+}
 export default class Footer extends React.Component<FooterProps> {
     public render() {
         return(
             <View style={styles.footer}>
                 <View style={styles.footerContainer}>
-                    <TouchableOpacity
-                        style={styles.footerButton}
-                        onPress={this.addEvent}
-                    >
-                        <Text style={styles.selectedNavButtonText}>Your Events</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        style={styles.footerButton}
-                        onPress={this.props.onManageGroups}
-                    >
-                        <Text style={styles.addEventText}>Manage Groups</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.addEventButton}
-                        onPress={this.props.onAddEvent}
-                    >
-                        <Text style={styles.addEventText}>Add Event</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.footerButton}
-                        onPress={this.addEvent}
-                    >
-                        <Text style={styles.addEventText}>Notifications</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.footerButton}
-                        onPress={this.addEvent}
-                    >
-                        <Text style={styles.addEventText}>More</Text>
-                    </TouchableOpacity>
+                    {this.plainFooterButton('Your Events', this.props.onManageGroups, ButtonStyles.SELECTED_BUTTON)}
+                    {this.plainFooterButton('Manage Groups', this.props.onManageGroups, ButtonStyles.NON_SELECTED_BUTTON)}
+                    {this.plainFooterButton('Add Event', this.props.onAddEvent, ButtonStyles.ADD_EVENT_BUTTON)}
+                    {this.plainFooterButton('Notifications', this.props.onManageGroups, ButtonStyles.NON_SELECTED_BUTTON)}
+                    {this.plainFooterButton('More', this.props.onManageGroups, ButtonStyles.NON_SELECTED_BUTTON)}
                 </View>
 
             </View>
+        )
+    }
+    private plainFooterButton = (buttonText: string, pressAction: () => null, buttonStyle: ButtonStyles) => {
+        let touchableStyle;
+        let buttonTextStyle;
+        switch (buttonStyle) {
+            case ButtonStyles.NON_SELECTED_BUTTON:
+                buttonTextStyle = styles.addEventText;
+                touchableStyle = styles.footerButton;
+                break;
+            case ButtonStyles.ADD_EVENT_BUTTON:
+                buttonTextStyle = styles.addEventText;
+                touchableStyle = styles.addEventButton;
+                break;
+            case ButtonStyles.SELECTED_BUTTON:
+                buttonTextStyle = styles.selectedNavButtonText;
+                touchableStyle = styles.footerButton;
+                break;
+        }
+        return(
+            <TouchableOpacity
+                style={touchableStyle}
+                onPress={pressAction}
+            >
+                <Text style={buttonTextStyle}>{buttonText}</Text>
+            </TouchableOpacity>
         )
     }
 }
