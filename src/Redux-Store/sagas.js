@@ -27,7 +27,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var SignIn_1 = require("../Sagas/SignIn");
+var LogonSaga_1 = require("../Logon/Sagas/LogonSaga");
 var effects_1 = require("redux-saga/effects");
 function main() {
     var sagas;
@@ -35,7 +35,7 @@ function main() {
         switch (_a.label) {
             case 0:
                 sagas = [
-                    SignIn_1.default()
+                    LogonSaga_1.default()
                 ];
                 return [4 /*yield*/, effects_1.all(sagas)];
             case 1:

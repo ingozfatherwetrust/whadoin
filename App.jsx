@@ -33,12 +33,12 @@ var __assign = (this && this.__assign) || function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = require("react");
 var react_navigation_1 = require("react-navigation");
-var LogonPage_1 = require("./src/Components/Logon/LogonPage");
+var LogonPage_1 = require("./src/Logon/Components/LogonPage");
 var Dashboard_1 = require("./src/Components/Dashboard/Dashboard");
 var AddEvent_1 = require("./src/Components/AddEvent/AddEvent");
 var react_redux_1 = require("react-redux");
 var configureStore_1 = require("./configureStore");
-var Logon_1 = require("./src/Actions/Logon");
+var Logon_1 = require("./src/Logon/Actions/Logon");
 var RootStack = react_navigation_1.createStackNavigator({
     LogOn: LogonPage_1.default,
     DashboardPage: Dashboard_1.default,
@@ -75,7 +75,7 @@ function todos(state, action) {
 }
 exports.todos = todos;
 // const store = createStore(todos)
-var store = configureStore_1.default();
+var store = configureStore_1.default;
 var App = /** @class */ (function (_super) {
     __extends(App, _super);
     function App() {

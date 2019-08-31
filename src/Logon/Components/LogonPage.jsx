@@ -16,7 +16,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = require("react");
 var react_native_1 = require("react-native");
 var redux_1 = require("redux");
-var Logon_1 = require("../../Actions/Logon");
+var Logon_1 = require("../Actions/Logon");
 var react_redux_1 = require("react-redux");
 var LogonPage = /** @class */ (function (_super) {
     __extends(LogonPage, _super);
@@ -56,6 +56,7 @@ var LogonPage = /** @class */ (function (_super) {
             _this.props.navigation.navigate('DashboardPage');
         };
         _this.signUp = function () {
+            debugger;
             _this.props.signUp(_this.state.email, _this.state.userName, _this.state.phoneNumber, _this.state.password);
             _this.props.navigation.navigate('DashboardPage');
         };

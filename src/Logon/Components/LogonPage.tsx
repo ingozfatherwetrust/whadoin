@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, TextInput, Image, ImageBackground, Button, TouchableOpacity} from 'react-native';
 import {bindActionCreators, Dispatch} from "redux";
-import {signIn, SignInAction, signUp, SignUpAction} from "../../Actions/Logon";
+import {signIn, SignInAction, signUp, SignUpAction} from "../Actions/Logon";
 import {connect} from "react-redux";
 
 type Props = {};
@@ -117,6 +117,7 @@ class LogonPage extends Component<ComponentProps, State> {
         this.props.navigation.navigate('DashboardPage');
     }
     private signUp = () => {
+        debugger;
         this.props.signUp(this.state.email, this.state.userName, this.state.phoneNumber, this.state.password);
         this.props.navigation.navigate('DashboardPage');
 
