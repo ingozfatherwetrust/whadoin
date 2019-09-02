@@ -40,20 +40,44 @@ function logonSaga(action) {
         }
     });
 }
+function firebaseAuthorizeSignUp(action) {
+    var auth, result, err_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 4]);
+                auth = react_native_firebase_1.default.auth();
+                return [4 /*yield*/, effects_1.call([auth, auth.createUserWithEmailAndPassword], action.email, action.password)];
+            case 1:
+                result = _a.sent();
+                alert('worked');
+                console.log('user', result);
+                debugger;
+                return [3 /*break*/, 4];
+            case 2:
+                err_1 = _a.sent();
+                // ToDo: add error mapping like I have listed below
+                // const error_message = { code: err.code, message: err.message };
+                return [4 /*yield*/, effects_1.put(Logon_1.SignUpRequestFailed(err_1.message))];
+            case 3:
+                // ToDo: add error mapping like I have listed below
+                // const error_message = { code: err.code, message: err.message };
+                _a.sent();
+                debugger;
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
+        }
+    });
+}
 function signUp(action) {
     return __generator(this, function (_a) {
-        debugger;
-        react_native_firebase_1.default.auth().createUserWithEmailAndPassword(action.email, action.password)
-            .then(function (user) {
-            alert('worked');
-            console.log('user', user);
-            debugger;
-        }).catch(function (err) {
-            alert('didn\'t work');
-            console.log('error', err);
-            debugger;
-        });
-        return [2 /*return*/];
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, effects_1.call(firebaseAuthorizeSignUp, action)];
+            case 1:
+                _a.sent();
+                debugger;
+                return [2 /*return*/];
+        }
     });
 }
 function signInMain() {

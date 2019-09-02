@@ -80,7 +80,7 @@ var LogonPage = /** @class */ (function (_super) {
 }(react_1.Component));
 var mapDispatchToProps = function (dispatch) { return ({
     signIn: redux_1.bindActionCreators(Logon_1.signIn, dispatch),
-    signUp: redux_1.bindActionCreators(Logon_1.signUp, dispatch)
+    signUp: redux_1.bindActionCreators(Logon_1.signUpRequest, dispatch)
 }); };
 exports.default = react_redux_1.connect(null, mapDispatchToProps)(LogonPage);
 var styles = react_native_1.StyleSheet.create({

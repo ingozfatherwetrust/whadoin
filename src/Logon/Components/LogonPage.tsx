@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, TextInput, Image, ImageBackground, Button, TouchableOpacity} from 'react-native';
 import {bindActionCreators, Dispatch} from "redux";
-import {signIn, SignInAction, signUp, SignUpAction} from "../Actions/Logon";
+import {signIn, SignInAction, signUpRequest, SignUpRequestAction} from "../Actions/Logon";
 import {connect} from "react-redux";
 
 type Props = {};
@@ -11,7 +11,7 @@ interface State {
 }
 interface PropsFromDispatch {
     signIn: (userName: string, password: string) => SignInAction;
-    signUp: (email: string, userName: string, phoneNumber: string, password: string) => SignUpAction;
+    signUp: (email: string, userName: string, phoneNumber: string, password: string) => SignUpRequestAction;
 }
 
 export type ComponentProps = Props & PropsFromDispatch;
@@ -126,7 +126,7 @@ class LogonPage extends Component<ComponentProps, State> {
 
 const mapDispatchToProps = (dispatch: Dispatch): PropsFromDispatch => ({
     signIn: bindActionCreators(signIn, dispatch),
-    signUp: bindActionCreators(signUp, dispatch)
+    signUp: bindActionCreators(signUpRequest, dispatch)
 });
 
 export default connect(null, mapDispatchToProps)(LogonPage)
