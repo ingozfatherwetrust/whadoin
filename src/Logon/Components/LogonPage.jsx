@@ -71,6 +71,7 @@ var LogonPage = /** @class */ (function (_super) {
     LogonPage.prototype.render = function () {
         var isSignUp = this.state.isSignUp;
         return (<react_native_1.ImageBackground source={require('../../../assets/WavyLeafBackground.jpg')} style={styles.container}>
+                <react_native_1.ActivityIndicator size="large" color="white"/>
                 {isSignUp ? this.renderSignUp() : this.renderSignIn()}
                 {this.renderSignInSignUpButton()}
                 {this.renderBottomText()}

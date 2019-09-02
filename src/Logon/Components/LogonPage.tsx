@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TextInput, Image, ImageBackground, Button, TouchableOpacity} from 'react-native';
+import {Platform, StyleSheet, Text, View, TextInput, Image, ImageBackground, Button, TouchableOpacity, ActivityIndicator} from 'react-native';
 import {bindActionCreators, Dispatch} from "redux";
 import {signIn, SignInAction, signUpRequest, SignUpRequestAction} from "../Actions/Logon";
 import {connect} from "react-redux";
@@ -31,6 +31,7 @@ class LogonPage extends Component<ComponentProps, State> {
         let {isSignUp} = this.state;
         return (
             <ImageBackground source={require('../../../assets/WavyLeafBackground.jpg')} style={styles.container}>
+                <ActivityIndicator size="large" color="white" />
                 {isSignUp ? this.renderSignUp() : this.renderSignIn()}
                 {this.renderSignInSignUpButton()}
                 {this.renderBottomText()}
