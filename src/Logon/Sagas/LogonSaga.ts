@@ -7,7 +7,8 @@ function* logonSaga(action) {
 }
 
 function* signUp(action: SignUpAction) {
-    yield firebase.auth().createUserWithEmailAndPassword(action.email, action.password)
+    debugger;
+    firebase.auth().createUserWithEmailAndPassword(action.email, action.password)
         .then((user) => {
             alert('worked')
             console.log('user', user);
@@ -20,7 +21,6 @@ function* signUp(action: SignUpAction) {
 }
 
 export default function* signInMain() {
-    debugger;
     yield takeEvery(AppIntroType.SignIn, logonSaga);
     yield takeEvery(AppIntroType.SignUp, signUp)
 }

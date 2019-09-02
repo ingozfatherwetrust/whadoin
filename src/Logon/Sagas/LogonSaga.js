@@ -42,29 +42,24 @@ function logonSaga(action) {
 }
 function signUp(action) {
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, react_native_firebase_1.default.auth().createUserWithEmailAndPassword(action.email, action.password)
-                    .then(function (user) {
-                    alert('worked');
-                    console.log('user', user);
-                    debugger;
-                }).catch(function (err) {
-                    alert('didn\'t work');
-                    console.log('error', err);
-                    debugger;
-                })];
-            case 1:
-                _a.sent();
-                return [2 /*return*/];
-        }
+        debugger;
+        react_native_firebase_1.default.auth().createUserWithEmailAndPassword(action.email, action.password)
+            .then(function (user) {
+            alert('worked');
+            console.log('user', user);
+            debugger;
+        }).catch(function (err) {
+            alert('didn\'t work');
+            console.log('error', err);
+            debugger;
+        });
+        return [2 /*return*/];
     });
 }
 function signInMain() {
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0:
-                debugger;
-                return [4 /*yield*/, effects_1.takeEvery(Logon_1.AppIntroType.SignIn, logonSaga)];
+            case 0: return [4 /*yield*/, effects_1.takeEvery(Logon_1.AppIntroType.SignIn, logonSaga)];
             case 1:
                 _a.sent();
                 return [4 /*yield*/, effects_1.takeEvery(Logon_1.AppIntroType.SignUp, signUp)];

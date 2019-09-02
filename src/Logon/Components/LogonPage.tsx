@@ -117,7 +117,6 @@ class LogonPage extends Component<ComponentProps, State> {
         this.props.navigation.navigate('DashboardPage');
     }
     private signUp = () => {
-        debugger;
         this.props.signUp(this.state.email, this.state.userName, this.state.phoneNumber, this.state.password);
         this.props.navigation.navigate('DashboardPage');
 

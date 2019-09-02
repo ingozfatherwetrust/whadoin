@@ -56,7 +56,6 @@ var LogonPage = /** @class */ (function (_super) {
             _this.props.navigation.navigate('DashboardPage');
         };
         _this.signUp = function () {
-            debugger;
             _this.props.signUp(_this.state.email, _this.state.userName, _this.state.phoneNumber, _this.state.password);
             _this.props.navigation.navigate('DashboardPage');
         };

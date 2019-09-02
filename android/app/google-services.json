@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "310753471555",
+    "firebase_url": "https://whadoin-788fe.firebaseio.com",
+    "project_id": "whadoin-788fe",
+    "storage_bucket": "whadoin-788fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310753471555:android:a9a4b869d98349d6",
+        "android_client_info": {
+          "package_name": "com.whadoin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "310753471555-hpt6lhkmpsvgeov7hd51adnjlh4hnau5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkMgx2qw6LvDk5PQy6Or5bAcbyVtcpM78"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "310753471555-hpt6lhkmpsvgeov7hd51adnjlh4hnau5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "310753471555-bmk0ca5j64v3boajsfh162eemmtvnd7o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.whadoin"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
