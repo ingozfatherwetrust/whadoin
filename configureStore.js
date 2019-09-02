@@ -12,7 +12,7 @@ export default function configureStore() {
         password: '',
         phoneNumber: ''
     }
-    const store = createStore(todos, initialState, compose(applyMiddleware(sagaMiddleware)));
+    const store = createStore(todos, initialState, compose(applyMiddleware(sagaMiddleware), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
     sagaMiddleware.run(sagas);
     return store;
 }

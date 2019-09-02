@@ -26,7 +26,7 @@ var LogonPage = /** @class */ (function (_super) {
             _this.props.signIn(_this.state.email, _this.state.password);
             _this.props.navigation.navigate('DashboardPage');
         };
-        _this.signUp = function () {
+        _this.signUpRequest = function () {
             alert('Sign up');
         };
         _this.state = {

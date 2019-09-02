@@ -1,23 +1,34 @@
-import { takeEvery } from 'redux-saga/effects'
-import {AppIntroType, SignUpAction} from "../Actions/Logon";
+import { takeEvery, call, put} from 'redux-saga/effects'
+import {AppIntroType, SignUpFailedResponseAction, SignUpRequestAction, SignUpRequestFailed} from "../Actions/Logon";
 import firebase from "react-native-firebase";
 
 function* logonSaga(action) {
     yield alert(`signInSaga: ${JSON.stringify(action)}`)
 }
 
-function* signUp(action: SignUpAction) {
+function* firebaseAuthorizeSignUp(action: SignUpRequestAction) {
+    try {
+        const auth = firebase.auth();
+        const result = yield call(
+            [auth, auth.createUserWithEmailAndPassword],
+            action.email,
+            action.password
+        );
+        alert('worked')
+        console.log('user', result);
+        debugger;
+        // ToDo: Only navigate at the end of the success sequence
+    } catch(err) {
+        // ToDo: add error mapping like I have listed below
+        // const error_message = { code: err.code, message: err.message };
+        yield put(SignUpRequestFailed(err.message));
+        debugger;
+    }
+}
+
+function* signUp(action: SignUpRequestAction) {
+    yield call(firebaseAuthorizeSignUp, action);
     debugger;
-    firebase.auth().createUserWithEmailAndPassword(action.email, action.password)
-        .then((user) => {
-            alert('worked')
-            console.log('user', user);
-            debugger;
-        }).catch((err) => {
-            alert('didn\'t work');
-            console.log('error', err);
-            debugger;
-        })
 }
 
 export default function* signInMain() {
