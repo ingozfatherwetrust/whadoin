@@ -41,7 +41,8 @@ const RootStack = createStackNavigator(
 );
 const AppContainer = createAppContainer(RootStack);
 let initialState = {
-    userName: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     phoneNumber: ''

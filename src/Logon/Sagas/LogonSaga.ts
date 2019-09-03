@@ -16,16 +16,10 @@ function* firebaseAuthorizeSignUp(action: SignUpRequestAction) {
             action.password
         );
         NavigationService.navigate('DashboardPage');
-        // this.props.navigation.navigate('DashboardPage');
-        alert('worked')
-        console.log('user', result);
-        debugger;
-        // ToDo: Only navigate at the end of the success sequence
     } catch(err) {
         // ToDo: add error mapping like I have listed below
         // const error_message = { code: err.code, message: err.message };
         yield put(SignUpRequestFailed(err.message));
-        debugger;
     }
 }
 

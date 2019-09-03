@@ -52,10 +52,6 @@ function firebaseAuthorizeSignUp(action) {
             case 1:
                 result = _a.sent();
                 NavigationService_1.default.navigate('DashboardPage');
-                // this.props.navigation.navigate('DashboardPage');
-                alert('worked');
-                console.log('user', result);
-                debugger;
                 return [3 /*break*/, 4];
             case 2:
                 err_1 = _a.sent();
@@ -66,7 +62,6 @@ function firebaseAuthorizeSignUp(action) {
                 // ToDo: add error mapping like I have listed below
                 // const error_message = { code: err.code, message: err.message };
                 _a.sent();
-                debugger;
                 return [3 /*break*/, 4];
             case 4: return [2 /*return*/];
         }

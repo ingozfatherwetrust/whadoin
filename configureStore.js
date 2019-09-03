@@ -15,7 +15,7 @@ function configureStore() {
     var initialState = {
         loginStatus: LoginStatus.LOGIN_UNATTEMPTED
     };
-    // const store = createStore(todos, initialState, compose(applyMiddleware(sagaMiddleware), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
+    // const store = createStore(todos, initialState, compose(applyMiddleware(sagaMiddleware)));
     var store = redux_1.createStore(App_1.todos, initialState, redux_1.compose(redux_1.applyMiddleware(sagaMiddleware), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
     sagaMiddleware.run(sagas_1.default);
     return store;

@@ -13,7 +13,7 @@ interface State {
 }
 interface PropsFromDispatch {
     signIn: (userName: string, password: string) => SignInAction;
-    signUp: (email: string, userName: string, phoneNumber: string, password: string) => SignUpRequestAction;
+    signUp: (email: string, firstName: string, lastName: string,q phoneNumber: string, password: string) => SignUpRequestAction;
 }
 
 export type ComponentProps = Props & PropsFromDispatch;
@@ -27,7 +27,8 @@ class LogonPage extends Component<ComponentProps, State> {
             email: '',
             password: '',
             phoneNumber: '',
-            userName: '',
+            firstName: '',
+            lastName: '',
             isSignUp: true
 
         };
@@ -74,9 +75,15 @@ class LogonPage extends Component<ComponentProps, State> {
                 />
                 <TextInput
                     style={styles.input}
-                    placeholder='Profile Name'
+                    placeholder='First Name'
                     placeholderTextColor='white'
-                    onChangeText={(text) => this.setState({userName: text})}
+                    onChangeText={(text) => this.setState({firstName: text})}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder='Last Name'
+                    placeholderTextColor='white'
+                    onChangeText={(text) => this.setState({lastName: text})}
                 />
                 <TextInput
                     style={styles.input}
@@ -124,7 +131,7 @@ class LogonPage extends Component<ComponentProps, State> {
         this.props.navigation.navigate('DashboardPage', );
     }
     private signUp = () => {
-        this.props.signUp(this.state.email, this.state.userName, this.state.phoneNumber, this.state.password);
+        this.props.signUp(this.state.email, this.state.firstName, this.state.lastName, this.state.phoneNumber, this.state.password);
         // this.props.navigation.navigate('DashboardPage');
 
     }

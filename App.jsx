@@ -50,7 +50,8 @@ var RootStack = react_navigation_stack_1.createStackNavigator({
 });
 var AppContainer = react_navigation_1.createAppContainer(RootStack);
 var initialState = {
-    userName: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     phoneNumber: ''

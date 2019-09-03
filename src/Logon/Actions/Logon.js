@@ -4,6 +4,7 @@ var AppIntroType;
 (function (AppIntroType) {
     AppIntroType["SignIn"] = "SIGN_IN";
     AppIntroType["SignUp"] = "SIGN_UP";
+    AppIntroType["SignUpSuccess"] = "SIGN_UP_SUCCESS";
     AppIntroType["SignUpFailed"] = "SIGN_UP_FAILED";
 })(AppIntroType = exports.AppIntroType || (exports.AppIntroType = {}));
 function signIn(userName, password) {
@@ -14,11 +15,12 @@ function signIn(userName, password) {
     };
 }
 exports.signIn = signIn;
-function signUpRequest(email, userName, phoneNumber, password) {
+function signUpRequest(email, firstName, lastName, phoneNumber, password) {
     return {
         type: AppIntroType.SignUp,
         email: email,
-        userName: userName,
+        firstName: firstName,
+        lastName: lastName,
         phoneNumber: phoneNumber,
         password: password
     };

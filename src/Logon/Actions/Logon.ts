@@ -3,6 +3,7 @@ import {Action} from "redux";
 export enum AppIntroType {
     SignIn = 'SIGN_IN',
     SignUp = 'SIGN_UP',
+    SignUpSuccess = 'SIGN_UP_SUCCESS',
     SignUpFailed = 'SIGN_UP_FAILED'
 }
 export interface SignInAction extends Action {
@@ -13,13 +14,18 @@ export interface SignInAction extends Action {
 export interface SignUpRequestAction extends Action {
     type: AppIntroType.SignUp;
     email: string;
-    userName: string;
+    firstName: string;
+    lastName: string;
     phoneNumber: string;
     password: string;
 }
 
 export interface SignUpFailedResponseAction extends Action {
     type: AppIntroType.SignUpFailed;
+    error: string
+}
+export interface SignUpSuccessResponseAction extends Action {
+    type: AppIntroType.SignUpSuccess;
     error: string
 }
 export function signIn(userName: string, password: string): SignInAction {
@@ -29,11 +35,12 @@ export function signIn(userName: string, password: string): SignInAction {
         password
     }
 }
-export function signUpRequest(email: string, userName: string, phoneNumber: string, password: string): SignUpRequestAction {
+export function signUpRequest(email: string, firstName: string, lastName: string, phoneNumber: string, password: string): SignUpRequestAction {
     return {
         type: AppIntroType.SignUp,
         email,
-        userName,
+        firstName,
+        lastName,
         phoneNumber,
         password
     }

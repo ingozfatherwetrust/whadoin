@@ -32,7 +32,8 @@ var LogonPage = /** @class */ (function (_super) {
         _this.renderSignUp = function () {
             return (<react_native_1.View>
                 <react_native_gesture_handler_1.TextInput style={styles.input} placeholder='Email Address' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ email: text }); }}/>
-                <react_native_gesture_handler_1.TextInput style={styles.input} placeholder='Profile Name' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ userName: text }); }}/>
+                <react_native_gesture_handler_1.TextInput style={styles.input} placeholder='First Name' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ firstName: text }); }}/>
+                <react_native_gesture_handler_1.TextInput style={styles.input} placeholder='Last Name' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ lastName: text }); }}/>
                 <react_native_gesture_handler_1.TextInput style={styles.input} placeholder='Phone Number' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ phoneNumber: text }); }}/>
                 <react_native_gesture_handler_1.TextInput style={styles.input} placeholder='Password' placeholderTextColor='white' secureTextEntry={true} onChangeText={function (text) { return _this.setState({ password: text }); }}/>
 
@@ -57,14 +58,15 @@ var LogonPage = /** @class */ (function (_super) {
             _this.props.navigation.navigate('DashboardPage');
         };
         _this.signUp = function () {
-            _this.props.signUp(_this.state.email, _this.state.userName, _this.state.phoneNumber, _this.state.password);
+            _this.props.signUp(_this.state.email, _this.state.firstName, _this.state.lastName, _this.state.phoneNumber, _this.state.password);
             // this.props.navigation.navigate('DashboardPage');
         };
         _this.state = {
             email: '',
             password: '',
             phoneNumber: '',
-            userName: '',
+            firstName: '',
+            lastName: '',
             isSignUp: true
         };
         return _this;
