@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TextInput, Image, ImageBackground, Button, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {Platform, StyleSheet, Text, View, Image, ImageBackground, Button, TouchableOpacity, ActivityIndicator, StatusBar} from 'react-native';
 import {bindActionCreators, Dispatch} from "redux";
 import {signIn, SignInAction, signUpRequest, SignUpRequestAction} from "../Actions/Logon";
 import {connect} from "react-redux";
+import {Themed} from "react-navigation";
+import {TextInput} from "react-native-gesture-handler";
 
 type Props = {};
 interface State {
@@ -16,6 +18,9 @@ interface PropsFromDispatch {
 
 export type ComponentProps = Props & PropsFromDispatch;
 class LogonPage extends Component<ComponentProps, State> {
+    static navigationOptions = {
+        header: null
+    }
     constructor(props) {
         super(props);
         this.state = {
@@ -31,6 +36,7 @@ class LogonPage extends Component<ComponentProps, State> {
         let {isSignUp} = this.state;
         return (
             <ImageBackground source={require('../../../assets/WavyLeafBackground.jpg')} style={styles.container}>
+                <StatusBar hidden={true} />
                 <ActivityIndicator size="large" color="white" />
                 {isSignUp ? this.renderSignUp() : this.renderSignIn()}
                 {this.renderSignInSignUpButton()}
@@ -115,11 +121,11 @@ class LogonPage extends Component<ComponentProps, State> {
     }
     private signIn = () => {
         this.props.signIn(this.state.email, this.state.password);
-        this.props.navigation.navigate('DashboardPage');
+        this.props.navigation.navigate('DashboardPage', );
     }
     private signUp = () => {
         this.props.signUp(this.state.email, this.state.userName, this.state.phoneNumber, this.state.password);
-        this.props.navigation.navigate('DashboardPage');
+        // this.props.navigation.navigate('DashboardPage');
 
     }
 

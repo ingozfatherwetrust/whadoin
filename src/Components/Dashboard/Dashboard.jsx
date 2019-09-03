@@ -66,6 +66,13 @@ var Dashboard = /** @class */ (function (_super) {
 
             </react_native_1.View>);
     };
+    Dashboard.navigationOptions = {
+        title: 'WhaDoin',
+        headerLeft: null,
+        headerStyle: {
+            backgroundColor: 'green',
+        },
+    };
     return Dashboard;
 }(react_1.default.Component));
 exports.default = Dashboard;

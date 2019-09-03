@@ -18,22 +18,23 @@ var react_native_1 = require("react-native");
 var redux_1 = require("redux");
 var Logon_1 = require("../Actions/Logon");
 var react_redux_1 = require("react-redux");
+var react_native_gesture_handler_1 = require("react-native-gesture-handler");
 var LogonPage = /** @class */ (function (_super) {
     __extends(LogonPage, _super);
     function LogonPage(props) {
         var _this = _super.call(this, props) || this;
         _this.renderSignIn = function () {
             return (<react_native_1.View>
-                <react_native_1.TextInput style={styles.input} placeholder='Email or Phone Number' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ email: text }); }}/>
-                <react_native_1.TextInput style={styles.input} placeholder='Password' placeholderTextColor='white' secureTextEntry={true} onChangeText={function (text) { return _this.setState({ password: text }); }}/>
+                <react_native_gesture_handler_1.TextInput style={styles.input} placeholder='Email or Phone Number' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ email: text }); }}/>
+                <react_native_gesture_handler_1.TextInput style={styles.input} placeholder='Password' placeholderTextColor='white' secureTextEntry={true} onChangeText={function (text) { return _this.setState({ password: text }); }}/>
             </react_native_1.View>);
         };
         _this.renderSignUp = function () {
             return (<react_native_1.View>
-                <react_native_1.TextInput style={styles.input} placeholder='Email Address' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ email: text }); }}/>
-                <react_native_1.TextInput style={styles.input} placeholder='Profile Name' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ userName: text }); }}/>
-                <react_native_1.TextInput style={styles.input} placeholder='Phone Number' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ phoneNumber: text }); }}/>
-                <react_native_1.TextInput style={styles.input} placeholder='Password' placeholderTextColor='white' secureTextEntry={true} onChangeText={function (text) { return _this.setState({ password: text }); }}/>
+                <react_native_gesture_handler_1.TextInput style={styles.input} placeholder='Email Address' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ email: text }); }}/>
+                <react_native_gesture_handler_1.TextInput style={styles.input} placeholder='Profile Name' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ userName: text }); }}/>
+                <react_native_gesture_handler_1.TextInput style={styles.input} placeholder='Phone Number' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ phoneNumber: text }); }}/>
+                <react_native_gesture_handler_1.TextInput style={styles.input} placeholder='Password' placeholderTextColor='white' secureTextEntry={true} onChangeText={function (text) { return _this.setState({ password: text }); }}/>
 
             </react_native_1.View>);
         };
@@ -57,7 +58,7 @@ var LogonPage = /** @class */ (function (_super) {
         };
         _this.signUp = function () {
             _this.props.signUp(_this.state.email, _this.state.userName, _this.state.phoneNumber, _this.state.password);
-            _this.props.navigation.navigate('DashboardPage');
+            // this.props.navigation.navigate('DashboardPage');
         };
         _this.state = {
             email: '',
@@ -71,11 +72,15 @@ var LogonPage = /** @class */ (function (_super) {
     LogonPage.prototype.render = function () {
         var isSignUp = this.state.isSignUp;
         return (<react_native_1.ImageBackground source={require('../../../assets/WavyLeafBackground.jpg')} style={styles.container}>
+                <react_native_1.StatusBar hidden={true}/>
                 <react_native_1.ActivityIndicator size="large" color="white"/>
                 {isSignUp ? this.renderSignUp() : this.renderSignIn()}
                 {this.renderSignInSignUpButton()}
                 {this.renderBottomText()}
             </react_native_1.ImageBackground>);
+    };
+    LogonPage.navigationOptions = {
+        header: null
     };
     return LogonPage;
 }(react_1.Component));

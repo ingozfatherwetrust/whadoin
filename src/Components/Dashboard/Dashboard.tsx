@@ -19,6 +19,13 @@ interface DashboardState {
     addEventModalVisible: boolean
 }
 export default class Dashboard extends React.Component<null, DashboardState> {
+    static navigationOptions = {
+        title: 'WhaDoin',
+        headerLeft: null,
+        headerStyle: {
+            backgroundColor: 'green',
+        },
+    };
     constructor(props) {
         super(props);
         this.state = {

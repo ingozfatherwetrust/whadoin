@@ -32,27 +32,23 @@ var __assign = (this && this.__assign) || function () {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = require("react");
-var react_navigation_1 = require("react-navigation");
+var react_navigation_stack_1 = require("react-navigation-stack");
 var LogonPage_1 = require("./src/Logon/Components/LogonPage");
 var Dashboard_1 = require("./src/Components/Dashboard/Dashboard");
 var AddEvent_1 = require("./src/Components/AddEvent/AddEvent");
 var react_redux_1 = require("react-redux");
 var configureStore_1 = require("./configureStore");
 var Logon_1 = require("./src/Logon/Actions/Logon");
-var RootStack = react_navigation_1.createStackNavigator({
+var react_navigation_1 = require("react-navigation");
+var NavigationService_1 = require("./NavigationService");
+var RootStack = react_navigation_stack_1.createStackNavigator({
     LogOn: LogonPage_1.default,
     DashboardPage: Dashboard_1.default,
     AddEventPage: AddEvent_1.default
 }, {
     initialRouteName: 'LogOn',
-    navigationOptions: {
-        title: 'Whadoin',
-        headerLeft: null,
-        headerStyle: {
-            backgroundColor: 'green',
-        },
-    }
 });
+var AppContainer = react_navigation_1.createAppContainer(RootStack);
 var initialState = {
     userName: '',
     email: '',
@@ -74,8 +70,6 @@ function todos(state, action) {
     }
 }
 exports.todos = todos;
-// const store = createStore(todos)
-var store = configureStore_1.default;
 var App = /** @class */ (function (_super) {
     __extends(App, _super);
     function App() {
@@ -83,7 +77,9 @@ var App = /** @class */ (function (_super) {
     }
     App.prototype.render = function () {
         return (<react_redux_1.Provider store={configureStore_1.default()}>
-            <RootStack />
+            <AppContainer ref={function (navigatorRef) {
+            NavigationService_1.default.setTopLevelNavigator(navigatorRef);
+        }}/>
         </react_redux_1.Provider>);
     };
     return App;

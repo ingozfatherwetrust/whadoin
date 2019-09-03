@@ -30,6 +30,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var effects_1 = require("redux-saga/effects");
 var Logon_1 = require("../Actions/Logon");
 var react_native_firebase_1 = require("react-native-firebase");
+var NavigationService_1 = require("../../../NavigationService");
 function logonSaga(action) {
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -50,6 +51,8 @@ function firebaseAuthorizeSignUp(action) {
                 return [4 /*yield*/, effects_1.call([auth, auth.createUserWithEmailAndPassword], action.email, action.password)];
             case 1:
                 result = _a.sent();
+                NavigationService_1.default.navigate('DashboardPage');
+                // this.props.navigation.navigate('DashboardPage');
                 alert('worked');
                 console.log('user', result);
                 debugger;
