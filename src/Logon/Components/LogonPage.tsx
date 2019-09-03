@@ -13,7 +13,7 @@ interface State {
 }
 interface PropsFromDispatch {
     signIn: (userName: string, password: string) => SignInAction;
-    signUp: (email: string, firstName: string, lastName: string,q phoneNumber: string, password: string) => SignUpRequestAction;
+    signUp: (email: string, firstName: string, lastName: string, phoneNumber: string, password: string) => SignUpRequestAction;
 }
 
 export type ComponentProps = Props & PropsFromDispatch;

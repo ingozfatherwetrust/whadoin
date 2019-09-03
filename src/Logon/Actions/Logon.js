@@ -26,6 +26,19 @@ function signUpRequest(email, firstName, lastName, phoneNumber, password) {
     };
 }
 exports.signUpRequest = signUpRequest;
+function signUpRequestSuccess(email, firstName, lastName, phoneNumber, password, refreshToken, uid) {
+    return {
+        type: AppIntroType.SignUpSuccess,
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        phoneNumber: phoneNumber,
+        password: password,
+        refreshToken: refreshToken,
+        uid: uid
+    };
+}
+exports.signUpRequestSuccess = signUpRequestSuccess;
 function SignUpRequestFailed(error) {
     return {
         type: AppIntroType.SignUpFailed,

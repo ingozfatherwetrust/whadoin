@@ -31,6 +31,7 @@ var effects_1 = require("redux-saga/effects");
 var Logon_1 = require("../Actions/Logon");
 var react_native_firebase_1 = require("react-native-firebase");
 var NavigationService_1 = require("../../../NavigationService");
+var react_native_1 = require("react-native");
 function logonSaga(action) {
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -42,29 +43,47 @@ function logonSaga(action) {
     });
 }
 function firebaseAuthorizeSignUp(action) {
-    var auth, result, err_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var email, firstName, lastName, password, phoneNumber, auth, result, _a, refreshToken, uid, err_1;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                _a.trys.push([0, 2, , 4]);
+                _b.trys.push([0, 3, , 5]);
+                email = action.email, firstName = action.firstName, lastName = action.lastName, password = action.password, phoneNumber = action.phoneNumber;
                 auth = react_native_firebase_1.default.auth();
                 return [4 /*yield*/, effects_1.call([auth, auth.createUserWithEmailAndPassword], action.email, action.password)];
             case 1:
-                result = _a.sent();
-                NavigationService_1.default.navigate('DashboardPage');
-                return [3 /*break*/, 4];
+                result = _b.sent();
+                _a = result.user._user, refreshToken = _a.refreshToken, uid = _a.uid;
+                return [4 /*yield*/, effects_1.put(Logon_1.signUpRequestSuccess(email, firstName, lastName, phoneNumber, password, refreshToken, uid))];
             case 2:
-                err_1 = _a.sent();
-                // ToDo: add error mapping like I have listed below
-                // const error_message = { code: err.code, message: err.message };
-                return [4 /*yield*/, effects_1.put(Logon_1.SignUpRequestFailed(err_1.message))];
+                _b.sent();
+                NavigationService_1.default.navigate('DashboardPage');
+                console.log(result);
+                return [3 /*break*/, 5];
             case 3:
+                err_1 = _b.sent();
                 // ToDo: add error mapping like I have listed below
                 // const error_message = { code: err.code, message: err.message };
-                _a.sent();
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+                // yield put(SignUpRequestFailed(err.message));
+                // yield take(AppIntroType.SignUpFailed)
+                return [4 /*yield*/, effects_1.call(signUpFailed, err_1.message)];
+            case 4:
+                // ToDo: add error mapping like I have listed below
+                // const error_message = { code: err.code, message: err.message };
+                // yield put(SignUpRequestFailed(err.message));
+                // yield take(AppIntroType.SignUpFailed)
+                _b.sent();
+                return [3 /*break*/, 5];
+            case 5: return [2 /*return*/];
         }
+    });
+}
+function signUpFailed(message) {
+    return __generator(this, function (_a) {
+        react_native_1.Alert.alert('Unable to Sign Up', message, [
+            { text: 'OK', onPress: function () { return console.log('OK Pressed'); } },
+        ]);
+        return [2 /*return*/];
     });
 }
 function signUp(action) {
@@ -73,7 +92,6 @@ function signUp(action) {
             case 0: return [4 /*yield*/, effects_1.call(firebaseAuthorizeSignUp, action)];
             case 1:
                 _a.sent();
-                debugger;
                 return [2 /*return*/];
         }
     });

@@ -58,14 +58,17 @@ var initialState = {
 };
 function todos(state, action) {
     if (state === void 0) { state = initialState; }
+    var firstName = action.firstName, lastName = action.lastName, email = action.email, password = action.password, phoneNumber = action.phoneNumber, refreshToken = action.refreshToken, uid = action.uid;
     switch (action.type) {
         case Logon_1.AppIntroType.SignIn:
             // let {userName, password} = action;
             console.log('state', state);
             return __assign({}, state, { userName: action.userName, password: action.password });
-        case Logon_1.AppIntroType.SignUp:
-            var userName = action.userName, email = action.email, password = action.password, phoneNumber = action.phoneNumber;
-            return __assign({}, state, { userName: userName, email: email, password: password, phoneNumber: phoneNumber });
+        // case AppIntroType.SignUp:
+        // const {firstName, lastName, email, password, phoneNumber} = action;
+        // return {...state, firstName, lastName, email, password, phoneNumber};
+        case Logon_1.AppIntroType.SignUpSuccess:
+            return __assign({}, state, { firstName: firstName, lastName: lastName, email: email, password: password, phoneNumber: phoneNumber, refreshToken: refreshToken, uid: uid });
         default:
             return state;
     }

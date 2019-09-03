@@ -46,17 +46,20 @@ let initialState = {
     email: '',
     password: '',
     phoneNumber: ''
-}
+};
 export function todos(state = initialState, action) {
-
+    const {firstName, lastName, email, password, phoneNumber, refreshToken, uid} = action;
     switch (action.type) {
         case AppIntroType.SignIn:
             // let {userName, password} = action;
             console.log('state', state);
             return {...state, userName: action.userName, password: action.password};
-        case AppIntroType.SignUp:
-            let {userName, email, password, phoneNumber} = action;
-            return {...state, userName, email, password, phoneNumber};
+        // case AppIntroType.SignUp:
+            // const {firstName, lastName, email, password, phoneNumber} = action;
+            // return {...state, firstName, lastName, email, password, phoneNumber};
+        case AppIntroType.SignUpSuccess:
+
+            return {...state, firstName, lastName, email, password, phoneNumber, refreshToken, uid}
         default:
             return state
     }

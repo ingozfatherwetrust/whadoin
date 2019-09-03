@@ -26,7 +26,13 @@ export interface SignUpFailedResponseAction extends Action {
 }
 export interface SignUpSuccessResponseAction extends Action {
     type: AppIntroType.SignUpSuccess;
-    error: string
+    email: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    password: string;
+    refreshToken: string;
+    uid: string
 }
 export function signIn(userName: string, password: string): SignInAction {
     return {
@@ -43,6 +49,18 @@ export function signUpRequest(email: string, firstName: string, lastName: string
         lastName,
         phoneNumber,
         password
+    }
+}
+export function signUpRequestSuccess(email: string, firstName: string, lastName: string, phoneNumber: string, password: string, refreshToken: string, uid: string): SignUpSuccessResponseAction {
+    return {
+        type: AppIntroType.SignUpSuccess,
+        email,
+        firstName,
+        lastName,
+        phoneNumber,
+        password,
+        refreshToken,
+        uid
     }
 }
 export function SignUpRequestFailed(error: string): SignUpFailedResponseAction {
