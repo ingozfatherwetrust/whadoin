@@ -5,6 +5,7 @@ import {signIn, SignInAction, signUpRequest, SignUpRequestAction} from "../Actio
 import {connect} from "react-redux";
 import {Themed} from "react-navigation";
 import {TextInput} from "react-native-gesture-handler";
+import WhiteTextBar from "./WhiteTextBar";
 
 type Props = {};
 interface State {
@@ -48,16 +49,12 @@ class LogonPage extends Component<ComponentProps, State> {
     private renderSignIn = () => {
         return(
             <View>
-                <TextInput
-                    style={styles.input}
+                <WhiteTextBar
                     placeholder='Email or Phone Number'
-                    placeholderTextColor='white'
                     onChangeText={(text) => this.setState({email: text})}
                 />
-                <TextInput
-                    style={styles.input}
+                <WhiteTextBar
                     placeholder='Password'
-                    placeholderTextColor='white'
                     secureTextEntry={true}
                     onChangeText={(text) => this.setState({password: text})}
                 />
@@ -67,34 +64,24 @@ class LogonPage extends Component<ComponentProps, State> {
     private renderSignUp = () => {
         return (
             <View>
-                <TextInput
-                    style={styles.input}
-                    placeholder='Email Address'
-                    placeholderTextColor='white'
+                <WhiteTextBar
+                    placeholder='Email or Phone Number'
                     onChangeText={(text) => this.setState({email: text})}
                 />
-                <TextInput
-                    style={styles.input}
+                <WhiteTextBar
                     placeholder='First Name'
-                    placeholderTextColor='white'
                     onChangeText={(text) => this.setState({firstName: text})}
                 />
-                <TextInput
-                    style={styles.input}
+                <WhiteTextBar
                     placeholder='Last Name'
-                    placeholderTextColor='white'
                     onChangeText={(text) => this.setState({lastName: text})}
                 />
-                <TextInput
-                    style={styles.input}
+                <WhiteTextBar
                     placeholder='Phone Number'
-                    placeholderTextColor='white'
                     onChangeText={(text) => this.setState({phoneNumber: text})}
                 />
-                <TextInput
-                    style={styles.input}
+                <WhiteTextBar
                     placeholder='Password'
-                    placeholderTextColor='white'
                     secureTextEntry={true}
                     onChangeText={(text) => this.setState({password: text})}
                 />

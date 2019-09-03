@@ -8,7 +8,7 @@ export enum AppIntroType {
 }
 export interface SignInAction extends Action {
     type: AppIntroType.SignIn;
-    userName: string;
+    email: string;
     password: string;
 }
 export interface SignUpRequestAction extends Action {
@@ -34,10 +34,10 @@ export interface SignUpSuccessResponseAction extends Action {
     refreshToken: string;
     uid: string
 }
-export function signIn(userName: string, password: string): SignInAction {
+export function signIn(email: string, password: string): SignInAction {
     return {
         type: AppIntroType.SignIn,
-        userName,
+        email,
         password
     }
 }

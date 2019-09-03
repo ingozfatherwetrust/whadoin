@@ -18,24 +18,24 @@ var react_native_1 = require("react-native");
 var redux_1 = require("redux");
 var Logon_1 = require("../Actions/Logon");
 var react_redux_1 = require("react-redux");
-var react_native_gesture_handler_1 = require("react-native-gesture-handler");
+var WhiteTextBar_1 = require("./WhiteTextBar");
 var LogonPage = /** @class */ (function (_super) {
     __extends(LogonPage, _super);
     function LogonPage(props) {
         var _this = _super.call(this, props) || this;
         _this.renderSignIn = function () {
             return (<react_native_1.View>
-                <react_native_gesture_handler_1.TextInput style={styles.input} placeholder='Email or Phone Number' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ email: text }); }}/>
-                <react_native_gesture_handler_1.TextInput style={styles.input} placeholder='Password' placeholderTextColor='white' secureTextEntry={true} onChangeText={function (text) { return _this.setState({ password: text }); }}/>
+                <WhiteTextBar_1.default placeholder='Email or Phone Number' onChangeText={function (text) { return _this.setState({ email: text }); }}/>
+                <WhiteTextBar_1.default placeholder='Password' secureTextEntry={true} onChangeText={function (text) { return _this.setState({ password: text }); }}/>
             </react_native_1.View>);
         };
         _this.renderSignUp = function () {
             return (<react_native_1.View>
-                <react_native_gesture_handler_1.TextInput style={styles.input} placeholder='Email Address' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ email: text }); }}/>
-                <react_native_gesture_handler_1.TextInput style={styles.input} placeholder='First Name' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ firstName: text }); }}/>
-                <react_native_gesture_handler_1.TextInput style={styles.input} placeholder='Last Name' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ lastName: text }); }}/>
-                <react_native_gesture_handler_1.TextInput style={styles.input} placeholder='Phone Number' placeholderTextColor='white' onChangeText={function (text) { return _this.setState({ phoneNumber: text }); }}/>
-                <react_native_gesture_handler_1.TextInput style={styles.input} placeholder='Password' placeholderTextColor='white' secureTextEntry={true} onChangeText={function (text) { return _this.setState({ password: text }); }}/>
+                <WhiteTextBar_1.default placeholder='Email or Phone Number' onChangeText={function (text) { return _this.setState({ email: text }); }}/>
+                <WhiteTextBar_1.default placeholder='First Name' onChangeText={function (text) { return _this.setState({ firstName: text }); }}/>
+                <WhiteTextBar_1.default placeholder='Last Name' onChangeText={function (text) { return _this.setState({ lastName: text }); }}/>
+                <WhiteTextBar_1.default placeholder='Phone Number' onChangeText={function (text) { return _this.setState({ phoneNumber: text }); }}/>
+                <WhiteTextBar_1.default placeholder='Password' secureTextEntry={true} onChangeText={function (text) { return _this.setState({ password: text }); }}/>
 
             </react_native_1.View>);
         };

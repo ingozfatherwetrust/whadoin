@@ -7,10 +7,10 @@ var AppIntroType;
     AppIntroType["SignUpSuccess"] = "SIGN_UP_SUCCESS";
     AppIntroType["SignUpFailed"] = "SIGN_UP_FAILED";
 })(AppIntroType = exports.AppIntroType || (exports.AppIntroType = {}));
-function signIn(userName, password) {
+function signIn(email, password) {
     return {
         type: AppIntroType.SignIn,
-        userName: userName,
+        email: email,
         password: password
     };
 }
