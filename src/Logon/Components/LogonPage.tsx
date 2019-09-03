@@ -3,9 +3,8 @@ import {Platform, StyleSheet, Text, View, Image, ImageBackground, Button, Toucha
 import {bindActionCreators, Dispatch} from "redux";
 import {signIn, SignInAction, signUpRequest, SignUpRequestAction} from "../Actions/Logon";
 import {connect} from "react-redux";
-import {Themed} from "react-navigation";
-import {TextInput} from "react-native-gesture-handler";
 import WhiteTextBar from "./WhiteTextBar";
+import styles from './Styles';
 
 type Props = {};
 interface State {
@@ -119,7 +118,6 @@ class LogonPage extends Component<ComponentProps, State> {
     }
     private signUp = () => {
         this.props.signUp(this.state.email, this.state.firstName, this.state.lastName, this.state.phoneNumber, this.state.password);
-        // this.props.navigation.navigate('DashboardPage');
 
     }
 
@@ -131,45 +129,3 @@ const mapDispatchToProps = (dispatch: Dispatch): PropsFromDispatch => ({
 });
 
 export default connect(null, mapDispatchToProps)(LogonPage)
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        resizeMode: 'cover',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    labels: {
-        color: 'white',
-    },
-    input: {
-        width: 200,
-        height: 40,
-        borderBottomWidth: 1,
-        borderBottomColor: 'white',
-        color: 'white',
-        fontSize: 20
-    },
-    button: {
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        padding: 5
-    },
-    buttonText: {
-        color: 'white',
-        fontSize: 20
-    },
-    bottomText: {
-        color: 'white',
-        fontSize: 14,
-    },
-    bottomButton: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderBottomColor: 'white',
-        borderBottomWidth: 1,
-        marginTop: 15
-    }
-
-});

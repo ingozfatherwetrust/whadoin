@@ -19,6 +19,7 @@ var redux_1 = require("redux");
 var Logon_1 = require("../Actions/Logon");
 var react_redux_1 = require("react-redux");
 var WhiteTextBar_1 = require("./WhiteTextBar");
+var Styles_1 = require("./Styles");
 var LogonPage = /** @class */ (function (_super) {
     __extends(LogonPage, _super);
     function LogonPage(props) {
@@ -40,8 +41,8 @@ var LogonPage = /** @class */ (function (_super) {
             </react_native_1.View>);
         };
         _this.renderSignInSignUpButton = function () {
-            return (<react_native_1.TouchableOpacity style={styles.button} onPress={_this.state.isSignUp ? _this.signUp : _this.signIn}>
-                <react_native_1.Text style={styles.buttonText}>{_this.state.isSignUp ? 'Sign Up' : 'Sign In'}</react_native_1.Text>
+            return (<react_native_1.TouchableOpacity style={Styles_1.default.button} onPress={_this.state.isSignUp ? _this.signUp : _this.signIn}>
+                <react_native_1.Text style={Styles_1.default.buttonText}>{_this.state.isSignUp ? 'Sign Up' : 'Sign In'}</react_native_1.Text>
             </react_native_1.TouchableOpacity>);
         };
         _this.renderBottomText = function () {
@@ -49,8 +50,8 @@ var LogonPage = /** @class */ (function (_super) {
             var signInBottom = 'Already a member? Sign in';
             var signUpBottom = 'Not a member? Sign up!';
             var bottomText = isSignUp ? signInBottom : signUpBottom;
-            return (<react_native_1.TouchableOpacity style={styles.bottomButton} onPress={function () { return _this.setState({ isSignUp: !isSignUp }); }}>
-                <react_native_1.Text style={styles.bottomText}>{bottomText}</react_native_1.Text>
+            return (<react_native_1.TouchableOpacity style={Styles_1.default.bottomButton} onPress={function () { return _this.setState({ isSignUp: !isSignUp }); }}>
+                <react_native_1.Text style={Styles_1.default.bottomText}>{bottomText}</react_native_1.Text>
             </react_native_1.TouchableOpacity>);
         };
         _this.signIn = function () {
@@ -59,7 +60,6 @@ var LogonPage = /** @class */ (function (_super) {
         };
         _this.signUp = function () {
             _this.props.signUp(_this.state.email, _this.state.firstName, _this.state.lastName, _this.state.phoneNumber, _this.state.password);
-            // this.props.navigation.navigate('DashboardPage');
         };
         _this.state = {
             email: '',
@@ -73,7 +73,7 @@ var LogonPage = /** @class */ (function (_super) {
     }
     LogonPage.prototype.render = function () {
         var isSignUp = this.state.isSignUp;
-        return (<react_native_1.ImageBackground source={require('../../../assets/WavyLeafBackground.jpg')} style={styles.container}>
+        return (<react_native_1.ImageBackground source={require('../../../assets/WavyLeafBackground.jpg')} style={Styles_1.default.container}>
                 <react_native_1.StatusBar hidden={true}/>
                 <react_native_1.ActivityIndicator size="large" color="white"/>
                 {isSignUp ? this.renderSignUp() : this.renderSignIn()}
@@ -91,43 +91,3 @@ var mapDispatchToProps = function (dispatch) { return ({
     signUp: redux_1.bindActionCreators(Logon_1.signUpRequest, dispatch)
 }); };
 exports.default = react_redux_1.connect(null, mapDispatchToProps)(LogonPage);
-var styles = react_native_1.StyleSheet.create({
-    container: {
-        flex: 1,
-        resizeMode: 'cover',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    labels: {
-        color: 'white',
-    },
-    input: {
-        width: 200,
-        height: 40,
-        borderBottomWidth: 1,
-        borderBottomColor: 'white',
-        color: 'white',
-        fontSize: 20
-    },
-    button: {
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        padding: 5
-    },
-    buttonText: {
-        color: 'white',
-        fontSize: 20
-    },
-    bottomText: {
-        color: 'white',
-        fontSize: 14,
-    },
-    bottomButton: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderBottomColor: 'white',
-        borderBottomWidth: 1,
-        marginTop: 15
-    }
-});

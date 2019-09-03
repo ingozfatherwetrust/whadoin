@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {TextInput} from "react-native-gesture-handler";
-import {StyleSheet} from 'react-native'
+import styles from './Styles';
 
 interface WhiteTextBarProps {
     placeholder: string;
@@ -21,14 +21,3 @@ export default class WhiteTextBar extends Component<WhiteTextBarProps> {
         )
     }
 }
-
-const styles = StyleSheet.create({
-    input: {
-        width: 200,
-        height: 40,
-        borderBottomWidth: 1,
-        borderBottomColor: 'white',
-        color: 'white',
-        fontSize: 20
-    },
-})

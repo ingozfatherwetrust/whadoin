@@ -15,25 +15,15 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = require("react");
 var react_native_gesture_handler_1 = require("react-native-gesture-handler");
-var react_native_1 = require("react-native");
+var Styles_1 = require("./Styles");
 var WhiteTextBar = /** @class */ (function (_super) {
     __extends(WhiteTextBar, _super);
     function WhiteTextBar() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     WhiteTextBar.prototype.render = function () {
-        return (<react_native_gesture_handler_1.TextInput style={styles.input} placeholder={this.props.placeholder} placeholderTextColor='white' secureTextEntry={this.props.secureTextEntry === true} onChangeText={this.props.onChangeText}/>);
+        return (<react_native_gesture_handler_1.TextInput style={Styles_1.default.input} placeholder={this.props.placeholder} placeholderTextColor='white' secureTextEntry={this.props.secureTextEntry === true} onChangeText={this.props.onChangeText}/>);
     };
     return WhiteTextBar;
 }(react_1.Component));
 exports.default = WhiteTextBar;
-var styles = react_native_1.StyleSheet.create({
-    input: {
-        width: 200,
-        height: 40,
-        borderBottomWidth: 1,
-        borderBottomColor: 'white',
-        color: 'white',
-        fontSize: 20
-    },
-});
